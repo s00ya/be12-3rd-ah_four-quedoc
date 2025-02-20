@@ -1,0 +1,28 @@
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"  # ????? ???
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: admin
+          uri: lb://admin
+          predicates:
+            - Path=/user/**
+
+
