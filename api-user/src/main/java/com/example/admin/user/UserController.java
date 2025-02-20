@@ -5,17 +5,24 @@ import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDTO;
 import com.example.admin.common.BaseResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
     private final UserService userService;
 
     @GetMapping("/test")
     public BaseResponse<String> test() {
+        logger.debug("DEBUG 로그 - 디버깅 용도");
+        logger.info("INFO 로그 - 일반적인 정보");
+        logger.warn("WARN 로그 - 경고 발생");
+        logger.error("ERROR 로그 - 에러 발생");
         return BaseResponse.success("test");
     }
 
