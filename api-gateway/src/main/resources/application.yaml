@@ -20,8 +20,8 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
       routes:
-        - id: admin
-          uri: lb://admin
+        - id: api-user
+          uri: lb://api-user
           predicates:
             - Path=/user/**
 
