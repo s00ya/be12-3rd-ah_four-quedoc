@@ -27,6 +27,6 @@ spring:
       repositories:
         enabled: true
   application:
-    name: admin
+    name: api-user
 
 
