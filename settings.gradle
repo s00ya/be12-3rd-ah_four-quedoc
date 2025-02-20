@@ -1,4 +1,9 @@
 rootProject.name = 'template'
 
-include 'admin'
+include 'api-user'
 include 'core'
+include 'api-gateway'
+include 'api-hospital'
+include 'api-payment'
+include 'api-search'
+include 'server-discovery'
