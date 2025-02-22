@@ -6,6 +6,7 @@ import com.example.admin.user.model.UserDto;
 import com.example.admin.common.BaseResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.core.util.JWTUtil;
 
@@ -79,7 +81,10 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public BaseResponse<String> signup(@RequestBody UserDto.SignupDto dto) {
+    public BaseResponse<String> signup(@Valid @RequestBody UserDto.SignupDto dto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            BaseResponse.error(12003,bindingResult.getFieldError().getDefaultMessage());
+        }
 
         User user = new User();
         user.setName(dto.getName());
@@ -96,7 +101,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BaseResponse<User> login(@RequestBody UserDto.LoginDto dto) {
+    public BaseResponse<User> login(@Valid @RequestBody UserDto.LoginDto dto , BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            BaseResponse.error(12003,bindingResult.getFieldError().getDefaultMessage());
+        }
 
         User user = userService.findByEmail(dto.getEmail());
 

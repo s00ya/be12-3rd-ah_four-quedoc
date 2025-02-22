@@ -1,6 +1,7 @@
 package com.example.admin.user;
 
 import com.example.admin.user.model.User;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,12 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void save(User user) {
+    public void save(@Valid User user) {
+
+
+
+
+
         userRepository.save(user);
     }
 
