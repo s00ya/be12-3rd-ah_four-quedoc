@@ -4,16 +4,16 @@ package com.example.admin.user.model;
 import lombok.Getter;
 
 
-public class UserDTO {
+public class UserDto {
 
     @Getter
-    public static class loginDTO {
+    public static class LoginDto {
         private String email;
         private String password;
     }
 
     @Getter
-    public static class updateDTO {
+    public static class UpdateDto {
         private String email;
         private String name;
         private String password;
@@ -26,7 +26,7 @@ public class UserDTO {
     }
 
     @Getter
-    public static class signupDTO {
+    public static class SignupDto {
         private String email;
         private String name;
         private String password;
