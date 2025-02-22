@@ -6,6 +6,7 @@ import com.example.admin.user.model.UserDto;
 import com.example.admin.common.BaseResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +17,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.core.util.JWTUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -45,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/testLogin")
-    public BaseResponse<String> testLogin(HttpServletResponse response,@RequestBody UserDto.LoginDto dto) {
+    public BaseResponse<UserDto.ResponseDto> testLogin(HttpServletResponse response,@RequestBody UserDto.LoginDto dto) {
         logger.info(JWTUtil.generateToken("test@test.com@test.com"));
         Map<String,Object> map = new HashMap<>();
         // 인증을 위한 객체 생성
@@ -70,7 +73,13 @@ public class UserController {
 
             // 쿠키를 응답에 추가
             response.addCookie(cookie);
-            return BaseResponse.success("ok");
+            User user = userService.findByEmail(dto.getEmail());
+
+            return BaseResponse.success(UserDto.ResponseDto.builder()
+                    .email(user.getEmail())
+                    .name(user.getName())
+                    .nickname(user.getNickname())
+                    .build());
         } else {
             System.out.println("authenticated fail");
             map.put("error","authenticated fail");
@@ -79,7 +88,10 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public BaseResponse<String> signup(@RequestBody UserDto.SignupDto dto) {
+    public BaseResponse<String> signup(@Valid @RequestBody UserDto.SignupDto dto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            BaseResponse.error(12003, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
 
         User user = new User();
         user.setName(dto.getName());
@@ -96,7 +108,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BaseResponse<User> login(@RequestBody UserDto.LoginDto dto) {
+    public BaseResponse<User> login(@Valid @RequestBody UserDto.LoginDto dto , BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            BaseResponse.error(12003, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+        }
 
         User user = userService.findByEmail(dto.getEmail());
 
