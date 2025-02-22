@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +22,7 @@ public class Review {
     private String nickName;
     private String passWord;
     private int score;
+    private LocalDate createdAt;
     private boolean isPublic;
 
 //    @ManyToOne
