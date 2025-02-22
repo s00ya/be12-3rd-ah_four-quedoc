@@ -1,8 +1,9 @@
-package com.example.hospital.review;
+package com.example.hospital.review.model;
 
-import com.example.hospital.review.model.Review;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.time.LocalDate;
 
 
 public class ReviewDto {
@@ -12,6 +13,7 @@ public class ReviewDto {
         private String contents;
         private String nickName;
         private String passWord;
+        private LocalDate createdAt;
         private int score;
         private boolean isPublic;
 
@@ -22,6 +24,7 @@ public class ReviewDto {
                     .nickName(nickName)
                     .passWord(passWord)
                     .score(score)
+                    .createdAt(createdAt)
                     .isPublic(isPublic)
                     .build();
         }
@@ -36,6 +39,7 @@ public class ReviewDto {
         private String nickName;
         private String passWord;
         private int score;
+        private LocalDate createdAt;
         private boolean isPublic;
 
         public static ReviewResponse of(Review entity) {
@@ -46,6 +50,7 @@ public class ReviewDto {
                     .nickName(entity.getNickName())
                     .passWord(entity.getPassWord())
                     .score(entity.getScore())
+                    .createdAt(entity.getCreatedAt())
                     .isPublic(entity.isPublic())
                     .build();
         }
