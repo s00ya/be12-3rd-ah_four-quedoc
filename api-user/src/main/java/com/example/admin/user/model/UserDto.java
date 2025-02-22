@@ -2,8 +2,7 @@ package com.example.admin.user.model;
 
 
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 public class UserDto {
@@ -70,5 +69,16 @@ public class UserDto {
         private String phoneNumber;
         private String emailDomain;
         private String customerTypeCode;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class ResponseDto {
+        private String email;
+        private String name;
+        private String nickname;
+
+
     }
 }
