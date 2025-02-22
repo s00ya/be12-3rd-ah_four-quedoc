@@ -1,4 +1,4 @@
-package com.example.hospital.notice;
+package com.example.hospital.notice.model;
 
 
 import jakarta.persistence.*;

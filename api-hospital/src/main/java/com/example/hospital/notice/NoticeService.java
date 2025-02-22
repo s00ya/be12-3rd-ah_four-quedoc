@@ -1,7 +1,7 @@
-package com.example.hospital;
+package com.example.hospital.notice;
 
-import com.example.hospital.notice.Notice;
-import com.example.hospital.notice.NoticeDto;
+import com.example.hospital.notice.model.Notice;
+import com.example.hospital.notice.model.NoticeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.example.hospital;
+package com.example.hospital.notice;
 
-import com.example.hospital.notice.Notice;
+import com.example.hospital.notice.model.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
