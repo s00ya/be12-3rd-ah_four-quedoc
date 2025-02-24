@@ -14,16 +14,15 @@ public class UserService {
 
     public void save(@Valid User user) {
 
-
-
-
-
         userRepository.save(user);
     }
 
     public User findByEmail(String email) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         return optionalUser.orElse(null);
+    }
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
 
