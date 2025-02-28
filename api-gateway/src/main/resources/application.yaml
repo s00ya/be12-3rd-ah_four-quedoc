@@ -24,5 +24,9 @@ spring:
           uri: lb://api-user
           predicates:
             - Path=/user/**
+        - id: api-hospital
+          uri: lb://api-hospital
+          predicates:
+            - Path=/hospital/**
 
 

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,18 +21,29 @@ public class HospitalDto {
     @Getter
     public static class HospitalRequest {
         private String name;
+        private String type;
         private String address;
+        private String detailAddress;
+        private String phoneNumber;
         private String department;
-        private String phone;
+        private String openTime;
+        private String closeTime;
+        private List<Integer> selectedTags;
 
         public Hospital toEntity() {
             return Hospital.builder()
                     .name(name)
+                    .type(type)
                     .address(address)
+                    .detailAddress(detailAddress)
+                    .phoneNumber(phoneNumber)
                     .department(department)
-                    .phone(phone)
+                    .openTime(openTime)
+                    .closeTime(closeTime)
                     .build();
         }
+
+
     }
 
     @Getter
@@ -40,7 +53,7 @@ public class HospitalDto {
         private String name;
         private String address;
         private String department;
-        private String phone;
+        private String phoneNumber;
 
         public static HospitalResponse from(Hospital hospital) {
             return HospitalResponse.builder()
@@ -48,7 +61,7 @@ public class HospitalDto {
                     .name(hospital.getName())
                     .address(hospital.getAddress())
                     .department(hospital.getDepartment())
-                    .phone(hospital.getPhone())
+                    .phoneNumber(hospital.getPhoneNumber())
                     .build();
         }
     }

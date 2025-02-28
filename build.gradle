@@ -7,14 +7,27 @@ repositories {
     mavenCentral()
 }
 
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+bootJar.enabled = false
 
 subprojects{
+
+    compileJava {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+    }
+
     apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    group = 'com.example'
-    version = '0.0.1-SNAPSHOT'
 
     repositories {
         mavenCentral()
@@ -30,16 +43,14 @@ subprojects{
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
         implementation 'org.springframework.boot:spring-boot-starter-log4j2:3.4.1'
 
+        implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+        runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+        runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }
-bootJar {
-    enabled = false
-}
 
-jar {
-    enabled = true
-}
 
-test {
-    useJUnitPlatform()
-}
