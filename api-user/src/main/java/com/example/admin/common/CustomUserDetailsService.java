@@ -1,7 +1,7 @@
 package com.example.admin.common;
 
-import com.example.admin.user.UserRepository;
 import com.example.admin.user.model.User;
+import com.example.admin.user.test.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

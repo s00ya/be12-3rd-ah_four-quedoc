@@ -3,6 +3,7 @@ package com.example.hospital;
 import com.example.core.common.BaseResponse;
 import com.example.hospital.model.Hospital;
 import com.example.hospital.model.HospitalDto;
+import com.example.hospital.test.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,10 @@ public class HospitalController {
     public BaseResponse<HospitalDto.HospitalResponse> register(@RequestBody HospitalDto.HospitalRequest dto) {
         HospitalDto.HospitalResponse hospitalResponse = hospitalService.save(dto);
         return BaseResponse.success(hospitalResponse);
+    }
+    @GetMapping("/test")
+    public BaseResponse<String> test() {
+        return BaseResponse.success("ok");
     }
 
 }

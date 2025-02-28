@@ -1,16 +1,12 @@
-package com.example.hospital;
+package com.example.hospital.test;
 
 import com.example.hospital.model.Hospital;
 import com.example.hospital.model.HospitalDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
