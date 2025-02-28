@@ -1,4 +1,4 @@
-package com.example.admin.user;
+package com.example.admin.user.test;
 
 import com.example.admin.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

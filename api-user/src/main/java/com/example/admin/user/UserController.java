@@ -3,6 +3,7 @@ package com.example.admin.user;
 
 import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
+import com.example.admin.user.test.UserService;
 import com.example.core.common.BaseResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,8 +21,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.core.util.JWTUtil;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController

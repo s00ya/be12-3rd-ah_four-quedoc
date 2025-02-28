@@ -1,15 +1,16 @@
 package com.example.apireservation.reservation;
 
 
-import com.example.admin.user.UserService;
+import com.example.admin.user.test.UserService;
 import com.example.apireservation.reservation.model.Reservation;
 import com.example.apireservation.reservation.model.ReservationDto;
 import com.example.core.common.BaseResponse;
-import com.example.hospital.HospitalService;
+import com.example.hospital.test.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
+import java.time.LocalDateTime;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +22,7 @@ public class ReservationController {
 
     @PostMapping("/register")
     public BaseResponse<String> register(@RequestBody ReservationDto.requestDto dto) {
-        try {0
+        try {
             reservationService.save(Reservation.builder()
                     .user(userService.findById(dto.getUser_id()))
                     .hospital(hospitalService.findById(dto.getHospital_idx()).orElse(null))
@@ -35,11 +36,13 @@ public class ReservationController {
 
     @GetMapping("/delete/{reservationIdx}")
     public BaseResponse<String> delete(@PathVariable Long reservationIdx) {
-        try {
-            reservationService.delete(reservationIdx);
-        } catch (Exception e) {
-            return BaseResponse.error(22002,e.getMessage());
-        }
+        int i =0;
+            i = reservationService.delete(reservationIdx);
+
+        System.out.println(i);
+            if(i>0){
+                return BaseResponse.success("no");
+            }
         return BaseResponse.success("ok");
     }
 
@@ -51,6 +54,11 @@ public class ReservationController {
         } catch (Exception e) {
             return BaseResponse.error(22003, e.getMessage());
         }
+        return BaseResponse.success("ok");
+    }
+
+    @GetMapping("/test")
+    public BaseResponse<String> test() {
         return BaseResponse.success("ok");
     }
 }

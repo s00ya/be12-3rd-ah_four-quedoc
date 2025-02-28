@@ -8,7 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,8 +32,11 @@ public class Reservation {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private LocalDate time;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime time;
 
-
+    @PrePersist
+    protected void onCreate() {
+        time = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES); // 초 제거
+    }
 }
