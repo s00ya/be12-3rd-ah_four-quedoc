@@ -1,5 +1,6 @@
 package com.example.hospital;
 
+import com.example.core.common.BaseResponse;
 import com.example.hospital.model.Hospital;
 import com.example.hospital.model.HospitalDto;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HospitalController {
     private final HospitalService hospitalService;
-
-    @PostMapping("/register")
-    public ResponseEntity<HospitalDto.HospitalResponse> addHospital(@RequestBody HospitalDto.HospitalRequest dto) {
-        HospitalDto.HospitalResponse response = hospitalService.save(dto);
-        return ResponseEntity.ok(response);
-    }
 
     @GetMapping("/list")
     public ResponseEntity<List<HospitalDto.HospitalResponse>> getAllHospitals() {
@@ -54,6 +49,13 @@ public class HospitalController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/register")
+    public BaseResponse<HospitalDto.HospitalResponse> register(@RequestBody HospitalDto.HospitalRequest dto) {
+        HospitalDto.HospitalResponse hospitalResponse = hospitalService.save(dto);
+        return BaseResponse.success(hospitalResponse);
+    }
+
 }
 
 

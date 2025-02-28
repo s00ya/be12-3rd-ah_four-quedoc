@@ -13,10 +13,10 @@ eureka:
     fetch-registry: true
 spring:
   datasource:
-    url: jdbc:mariadb://192.0.4.202:3306/one
-    username: one
-    password: qwer1234
+    url: ${DB_URL}
     driver-class-name: org.mariadb.jdbc.Driver
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update

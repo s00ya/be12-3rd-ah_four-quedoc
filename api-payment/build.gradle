@@ -1,4 +1,9 @@
 
+group = 'com.example.payment'
+version = '0.0.1-SNAPSHOT'
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation(project(":api-hospital"))

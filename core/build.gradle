@@ -1,4 +1,9 @@
-group = 'com.example.core.model.Hospital'
+group = 'com.example.core'
+version = '0.0.1-SNAPSHOT'
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
 

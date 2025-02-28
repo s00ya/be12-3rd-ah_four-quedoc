@@ -21,7 +21,7 @@ public class ReservationController {
 
     @PostMapping("/register")
     public BaseResponse<String> register(@RequestBody ReservationDto.requestDto dto) {
-        try {
+        try {0
             reservationService.save(Reservation.builder()
                     .user(userService.findById(dto.getUser_id()))
                     .hospital(hospitalService.findById(dto.getHospital_idx()).orElse(null))

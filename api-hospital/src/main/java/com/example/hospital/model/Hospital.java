@@ -3,6 +3,8 @@ package com.example.hospital.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -23,6 +25,19 @@ public class Hospital {
     private String department;
 
     @Column(nullable = false)
-    private String phone;
+    private String phoneNumber;
+
+
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
+    private String detailAddress;
+
+    @Column(nullable = false)
+    private String openTime;
+
+    @Column(nullable = false)
+    private String closeTime;
 
 }

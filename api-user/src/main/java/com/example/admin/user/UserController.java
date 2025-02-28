@@ -3,7 +3,7 @@ package com.example.admin.user;
 
 import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
-import com.example.admin.common.BaseResponse;
+import com.example.core.common.BaseResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +23,6 @@ import com.example.core.util.JWTUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,9 +46,10 @@ public class UserController {
     }
 
     @PostMapping("/testLogin")
-    public BaseResponse<UserDto.ResponseDto> testLogin(HttpServletResponse response,@RequestBody UserDto.LoginDto dto) {
-        logger.info(JWTUtil.generateToken("test@test.com@test.com"));
-        Map<String,Object> map = new HashMap<>();
+    public BaseResponse<UserDto.ResponseDto> testLogin(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
+
+        System.out.println(dto.getEmail());
+        System.out.println(dto.getPassword());
         // 인증을 위한 객체 생성
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
@@ -59,7 +58,6 @@ public class UserController {
         try {
             authentication = authenticationManager.authenticate(authenticationToken);
         } catch (AuthenticationException e) {
-            map.put("error", e.getMessage());
             return BaseResponse.error(12001,"인증 실패 오류");
         }
         // 인증이 성공하면 JWT 토큰 생성
@@ -82,7 +80,6 @@ public class UserController {
                     .build());
         } else {
             System.out.println("authenticated fail");
-            map.put("error","authenticated fail");
             return BaseResponse.error(12002,"인증 실패 오류");
         }
     }
@@ -104,7 +101,7 @@ public class UserController {
 
         userService.save(user);
 
-        return BaseResponse.success("signup success");
+        return BaseResponse.success("ok");
     }
 
     @PostMapping("/login")

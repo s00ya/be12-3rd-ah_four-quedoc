@@ -9,9 +9,15 @@ public class UserDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class LoginDto {
         @NotBlank(message = "이메일을 입력하세요.")
         @Email(message = "유효한 이메일 형식이 아닙니다.")
+        @Pattern(
+                regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
+                message = "올바른 이메일 주소를 입력하세요."
+        )
         private String email;
 
         @NotBlank(message = "비밀번호를 입력하세요.")
