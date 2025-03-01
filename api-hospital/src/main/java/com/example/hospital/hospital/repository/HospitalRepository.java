@@ -1,6 +1,6 @@
-package com.example.hospital.test;
+package com.example.hospital.hospital.repository;
 
-import com.example.hospital.model.Hospital;
+import com.example.hospital.hospital.model.Hospital;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 

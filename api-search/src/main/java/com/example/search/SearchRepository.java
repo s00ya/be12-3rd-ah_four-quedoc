@@ -1,7 +1,6 @@
 package com.example.search;
 
-import com.example.hospital.model.Hospital;
-import com.example.hospital.model.HospitalDto;
+import com.example.hospital.hospital.model.Hospital;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

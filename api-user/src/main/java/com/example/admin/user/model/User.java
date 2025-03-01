@@ -12,20 +12,28 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false,unique = true)
     private String email;
+
     @Column(nullable = false)
     private String phone;
-    private String nickname;
-    private String birthDate;
-    private String gender;
 
-    private String address;
-    private int age;
+    @Column(nullable = false)
+    private String nickname;
+
+    @Column(nullable = false)
+    private String birthDate;
+
+    @Column(nullable = false)
+    private String type;
+
+    private Boolean register;
 }

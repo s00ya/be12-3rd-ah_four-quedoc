@@ -1,9 +1,9 @@
-package com.example.admin.user;
+package com.example.admin.user.controller;
 
 
 import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
-import com.example.admin.user.test.UserService;
+import com.example.admin.user.service.UserService;
 import com.example.core.common.BaseResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,12 +39,10 @@ public class UserController {
         logger.warn("WARN 로그 - 경고 발생");
         logger.error("ERROR 로그 - 에러 발생");
         logger.info(headers);
-        String name = headers.getFirst("username");
-        if(userService.findByEmail(name) != null) {}
         return BaseResponse.success("ok");
     }
 
-    @PostMapping("/testLogin")
+    @PostMapping("/login")
     public BaseResponse<UserDto.ResponseDto> testLogin(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
 
         System.out.println(dto.getEmail());
@@ -76,6 +74,7 @@ public class UserController {
                     .email(user.getEmail())
                     .name(user.getName())
                     .nickname(user.getNickname())
+                    .type(user.getType())
                     .build());
         } else {
             System.out.println("authenticated fail");
@@ -95,28 +94,16 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setPhone(dto.getPhoneNumber());
         user.setNickname(dto.getNickname());
-        user.setBirthDate(dto.getBirthDate());
-        user.setGender(dto.getGender());
+        user.setType(dto.getCustomerTypeCode());
+        if(user.getType().equals("B")) {
+            user.setRegister(false);
+        }
 
         userService.save(user);
 
         return BaseResponse.success("ok");
     }
 
-    @PostMapping("/login")
-    public BaseResponse<User> login(@Valid @RequestBody UserDto.LoginDto dto , BindingResult bindingResult) {
-
-        if(bindingResult.hasErrors()) {
-            BaseResponse.error(12003, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
-        }
-
-        User user = userService.findByEmail(dto.getEmail());
-
-        if (user == null) {
-            return BaseResponse.error(12001,"login fail");
-        }
-        return BaseResponse.success(user);
-    }
 
     @PostMapping("/update")
     public BaseResponse<String> update(@RequestBody UserDto.UpdateDto dto) {
@@ -127,6 +114,36 @@ public class UserController {
             user.setPhone(dto.getPhoneNumber());
             userService.save(user);
             return BaseResponse.success("update success");
+        } else {
+            return BaseResponse.error(12002,"not found");
+        }
+    }
+
+    @GetMapping("/getUser")
+    public BaseResponse<UserDto.ResponseDto> getUser(@RequestParam long id) {
+        User user = userService.findById(id);
+        if(user != null) {
+            UserDto.ResponseDto responseDto = UserDto.ResponseDto.builder()
+                    .email(user.getEmail())
+                    .name(user.getName())
+                    .nickname(user.getNickname())
+                    .type(user.getType())
+                    .build();
+            return BaseResponse.success(responseDto);
+        }
+        return BaseResponse.error(12002,"not found");
+    }
+
+    @PostMapping("/verify")
+    public BaseResponse<String> verify(@RequestParam String email, String password) {
+        User user = userService.findByEmail(email);
+
+        if(user != null) {
+            if(passwordEncoder.matches(password, user.getPassword())) {
+                return BaseResponse.success("ok");
+            } else {
+                return BaseResponse.error(12003,"password not match");
+            }
         } else {
             return BaseResponse.error(12002,"not found");
         }

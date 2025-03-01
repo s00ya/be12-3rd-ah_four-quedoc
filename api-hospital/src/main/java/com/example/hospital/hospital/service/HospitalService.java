@@ -1,7 +1,8 @@
-package com.example.hospital.test;
+package com.example.hospital.hospital.service;
 
-import com.example.hospital.model.Hospital;
-import com.example.hospital.model.HospitalDto;
+import com.example.hospital.hospital.model.Hospital;
+import com.example.hospital.hospital.model.HospitalDto;
+import com.example.hospital.hospital.repository.HospitalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

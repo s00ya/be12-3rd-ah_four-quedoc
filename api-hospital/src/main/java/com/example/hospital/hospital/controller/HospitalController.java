@@ -1,9 +1,9 @@
-package com.example.hospital;
+package com.example.hospital.hospital.controller;
 
 import com.example.core.common.BaseResponse;
-import com.example.hospital.model.Hospital;
-import com.example.hospital.model.HospitalDto;
-import com.example.hospital.test.HospitalService;
+import com.example.hospital.hospital.model.Hospital;
+import com.example.hospital.hospital.model.HospitalDto;
+import com.example.hospital.hospital.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
