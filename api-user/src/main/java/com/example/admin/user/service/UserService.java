@@ -1,6 +1,7 @@
-package com.example.admin.user.test;
+package com.example.admin.user.service;
 
 import com.example.admin.user.model.User;
+import com.example.admin.user.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

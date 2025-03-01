@@ -36,9 +36,7 @@ public class UserDto {
         private String password;
         private String nickname;
         private String birthDate;
-        private String gender;
         private String phoneNumber;
-        private String emailDomain;
         private String customerTypeCode;
     }
 
@@ -65,7 +63,6 @@ public class UserDto {
         private String nickname;
 
         private String birthDate;
-        private String gender;
 
         @NotBlank(message = "전화번호를 입력하세요.")
         @Pattern(
@@ -73,7 +70,7 @@ public class UserDto {
                 message = "전화번호 형식이 올바르지 않습니다. (예: 010-1234-5678)"
         )
         private String phoneNumber;
-        private String emailDomain;
+
         private String customerTypeCode;
     }
 
@@ -84,6 +81,7 @@ public class UserDto {
         private String email;
         private String name;
         private String nickname;
+        private String type;
 
 
     }

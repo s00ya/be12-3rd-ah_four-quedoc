@@ -1,4 +1,4 @@
-package com.example.hospital.model;
+package com.example.hospital.hospital.model;
 
 import jakarta.persistence.*;
 import lombok.*;

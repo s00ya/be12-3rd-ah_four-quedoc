@@ -3,7 +3,7 @@ package com.example.apireservation.reservation.model;
 
 import com.example.admin.user.model.User;
 import jakarta.persistence.*;
-import com.example.hospital.model.Hospital;
+import com.example.hospital.hospital.model.Hospital;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

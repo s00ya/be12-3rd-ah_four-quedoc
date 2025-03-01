@@ -1,15 +1,13 @@
 package com.example.apireservation.reservation;
 
 
-import com.example.admin.user.test.UserService;
+import com.example.admin.user.service.UserService;
 import com.example.apireservation.reservation.model.Reservation;
 import com.example.apireservation.reservation.model.ReservationDto;
 import com.example.core.common.BaseResponse;
-import com.example.hospital.test.HospitalService;
+import com.example.hospital.hospital.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 
 @RequiredArgsConstructor
