@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example")
+@ComponentScan(basePackages = {"com.example.core","com.example.admin"})
 public class AdminApplication {
 
 	public static void main(String[] args) {

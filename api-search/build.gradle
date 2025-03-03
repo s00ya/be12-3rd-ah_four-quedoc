@@ -4,13 +4,26 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2024.0.0")
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation project(':api-hospital')
 
 
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
 
 }
 
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
