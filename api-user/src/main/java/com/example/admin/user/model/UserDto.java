@@ -1,6 +1,7 @@
 package com.example.admin.user.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ public class UserDto {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    @Schema(description = "로그인할때 사용하는 dto, email과 password 필요")
     public static class LoginDto {
         @NotBlank(message = "이메일을 입력하세요.")
         @Email(message = "유효한 이메일 형식이 아닙니다.")
@@ -30,6 +32,7 @@ public class UserDto {
 
     @Getter
     @Setter
+    @Schema(description = "유저 정보를 수정할때 사용하는 dto")
     public static class UpdateDto {
         private String email;
         private String name;
@@ -42,6 +45,7 @@ public class UserDto {
 
     @Getter
     @Setter
+    @Schema(description = "유저 회원가입을 할때 사용하는 dto")
     public static class SignupDto {
         @NotBlank(message = "이메일을 입력하세요.")
         @Email(message = "유효한 이메일 형식이 아닙니다.")
@@ -77,12 +81,11 @@ public class UserDto {
     @Getter
     @Setter
     @Builder
+    @Schema(description = "유저 정보 응답할때 사용하는 dto")
     public static class ResponseDto {
         private String email;
         private String name;
         private String nickname;
         private String type;
-
-
     }
 }
