@@ -34,3 +34,12 @@ spring:
           uri: lb://api-reservation
           predicates:
             - Path=/reservation/**
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: user
+        url: /user/v3/api-docs
+      - name: reservation
+        url: /reservation/v3/api-docs

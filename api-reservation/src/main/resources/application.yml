@@ -28,3 +28,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+springdoc:
+  api-docs:
+    path: /reservation/v3/api-docs
+  swagger-ui:
+    path: /reservation/swagger-ui.html
