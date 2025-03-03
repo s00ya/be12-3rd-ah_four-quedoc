@@ -5,6 +5,8 @@ import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
 import com.example.admin.user.service.UserService;
 import com.example.core.common.BaseResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Tag(name="API", description = "User API 입니다.")
 public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
@@ -34,6 +37,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     @GetMapping("/test")
+    @Operation(summary = "테스트", description = "접속이 잘 되는지 테스트하는 API 입니다.")
     public BaseResponse<String> test(@RequestHeader HttpHeaders headers) {
         logger.info("INFO 로그 - 일반적인 정보");
         logger.warn("WARN 로그 - 경고 발생");
@@ -43,7 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public BaseResponse<UserDto.ResponseDto> testLogin(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
+    @Operation(summary = "로그인", description = "이메일, 비밀번호로 로그인, 인증 후 JWT 토큰을 반환하는 API 입니다.")
+    public BaseResponse<UserDto.ResponseDto> login(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
 
         System.out.println(dto.getEmail());
         System.out.println(dto.getPassword());
@@ -83,6 +88,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
+    @Operation(summary = "회원 가입", description = "회원 정보를 받아 회원 가입을 합니다.")
     public BaseResponse<String> signup(@Valid @RequestBody UserDto.SignupDto dto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             BaseResponse.error(12003, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
@@ -106,6 +112,7 @@ public class UserController {
 
 
     @PostMapping("/update")
+    @Operation(summary = "정보 수정", description = "사용자의 정보를 수정하는 API 입니다.")
     public BaseResponse<String> update(@RequestBody UserDto.UpdateDto dto) {
         User user = userService.findByEmail(dto.getEmail());
         if(user != null) {
@@ -120,6 +127,7 @@ public class UserController {
     }
 
     @GetMapping("/getUser")
+    @Operation(summary = "유저 조회", description = "해당 id의 user의 정보를 조회합니다.")
     public BaseResponse<UserDto.ResponseDto> getUser(@RequestParam long id) {
         User user = userService.findById(id);
         if(user != null) {
@@ -135,6 +143,7 @@ public class UserController {
     }
 
     @PostMapping("/verify")
+    @Operation(summary = "비밀번호 인증", description = "해당 회원의 비밀번호가 맞는지 검사하는 API 입니다.")
     public BaseResponse<String> verify(@RequestParam String email, String password) {
         User user = userService.findByEmail(email);
 
