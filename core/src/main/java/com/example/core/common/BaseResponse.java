@@ -17,7 +17,7 @@ public class BaseResponse<T> {
     }
 
     // 실패 응답을 위한 정적 메서드
-    public static <T> BaseResponse<T> error(int code, String message) {
-        return new BaseResponse<>(code, message, null);
+    public static <T> BaseResponse<T> error(ErrorCode errorCode) {
+        return new BaseResponse<>(errorCode.getStatus(), errorCode.getMessage(),  null);
     }
 }

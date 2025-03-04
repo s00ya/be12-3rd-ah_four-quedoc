@@ -5,6 +5,7 @@ import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
 import com.example.admin.user.service.UserService;
 import com.example.core.common.BaseResponse;
+import com.example.core.common.ErrorCode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
@@ -40,7 +41,7 @@ public class UserController {
     @Operation(summary = "테스트", description = "접속이 잘 되는지 테스트하는 API 입니다.")
     public BaseResponse<String> test(@RequestHeader HttpHeaders headers) {
         logger.info("INFO 로그 - 일반적인 정보");
-        logger.warn("WARN 로그 - 경고 발생");
+        logger.error("error 로그 - 경고 발생");
         logger.error("ERROR 로그 - 에러 발생");
         logger.info(headers);
         return BaseResponse.success("ok");
@@ -50,8 +51,8 @@ public class UserController {
     @Operation(summary = "로그인", description = "이메일, 비밀번호로 로그인, 인증 후 JWT 토큰을 반환하는 API 입니다.")
     public BaseResponse<UserDto.ResponseDto> login(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
 
-        System.out.println(dto.getEmail());
-        System.out.println(dto.getPassword());
+        logger.info("login api");
+
         // 인증을 위한 객체 생성
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
@@ -60,11 +61,13 @@ public class UserController {
         try {
             authentication = authenticationManager.authenticate(authenticationToken);
         } catch (AuthenticationException e) {
-            return BaseResponse.error(12001,"인증 실패 오류");
+            logger.error("인증 실패 오류" + e.getMessage());
+            return BaseResponse.error(ErrorCode.AUTHENTICATION_FAIL);
         }
         // 인증이 성공하면 JWT 토큰 생성
         if (authentication != null && authentication.isAuthenticated()) {
-            System.out.println("authenticated");
+
+            logger.info("인증 성공");
             String token =  JWTUtil.generateToken(dto.getEmail()); // JWT 토큰 생성 후 반환
             Cookie cookie = new Cookie("JWT", token);
             cookie.setHttpOnly(true);   // HTTP-only 속성 설정
@@ -74,7 +77,7 @@ public class UserController {
             // 쿠키를 응답에 추가
             response.addCookie(cookie);
             User user = userService.findByEmail(dto.getEmail());
-
+            logger.info("JWT 토큰 포함해서 반환");
             return BaseResponse.success(UserDto.ResponseDto.builder()
                     .email(user.getEmail())
                     .name(user.getName())
@@ -82,53 +85,59 @@ public class UserController {
                     .type(user.getType())
                     .build());
         } else {
-            System.out.println("authenticated fail");
-            return BaseResponse.error(12002,"인증 실패 오류");
+            logger.error("인증 실패 오류");
+            return BaseResponse.error(ErrorCode.AUTHENTICATION_FAIL);
         }
     }
 
     @PostMapping("/signup")
     @Operation(summary = "회원 가입", description = "회원 정보를 받아 회원 가입을 합니다.")
     public BaseResponse<String> signup(@Valid @RequestBody UserDto.SignupDto dto, BindingResult bindingResult) {
+
+        logger.info("signup api");
+
         if(bindingResult.hasErrors()) {
-            BaseResponse.error(12003, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+            logger.error("검증 실패 오류");
+            return BaseResponse.error(ErrorCode.VERIFICATION_FAILED);
         }
 
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        user.setPhone(dto.getPhoneNumber());
-        user.setNickname(dto.getNickname());
-        user.setType(dto.getCustomerTypeCode());
-        if(user.getType().equals("B")) {
-            user.setRegister(false);
-        }
+        User user = User.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .phone(dto.getPhoneNumber())
+                .nickname(dto.getNickname())
+                .type(dto.getCustomerTypeCode())
+                .register(false)
+                .build();
 
         userService.save(user);
 
-        return BaseResponse.success("ok");
+        return BaseResponse.success("Signup success");
     }
 
 
     @PostMapping("/update")
     @Operation(summary = "정보 수정", description = "사용자의 정보를 수정하는 API 입니다.")
     public BaseResponse<String> update(@RequestBody UserDto.UpdateDto dto) {
+        logger.info("update api");
         User user = userService.findByEmail(dto.getEmail());
         if(user != null) {
             user.setName(dto.getName());
-            user.setPassword(dto.getPassword());
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
             user.setPhone(dto.getPhoneNumber());
             userService.save(user);
             return BaseResponse.success("update success");
         } else {
-            return BaseResponse.error(12002,"not found");
+            logger.error("user not found");
+            return BaseResponse.error(ErrorCode.UPDATE_FAILED);
         }
     }
 
     @GetMapping("/getUser")
     @Operation(summary = "유저 조회", description = "해당 id의 user의 정보를 조회합니다.")
     public BaseResponse<UserDto.ResponseDto> getUser(@RequestParam long id) {
+        logger.info("getUser api");
         User user = userService.findById(id);
         if(user != null) {
             UserDto.ResponseDto responseDto = UserDto.ResponseDto.builder()
@@ -138,23 +147,28 @@ public class UserController {
                     .type(user.getType())
                     .build();
             return BaseResponse.success(responseDto);
+        } else {
+            logger.error("user not found");
+            return BaseResponse.error(ErrorCode.NO_EXIST);
         }
-        return BaseResponse.error(12002,"not found");
     }
 
     @PostMapping("/verify")
     @Operation(summary = "비밀번호 인증", description = "해당 회원의 비밀번호가 맞는지 검사하는 API 입니다.")
     public BaseResponse<String> verify(@RequestParam String email, String password) {
+        logger.info("verify api");
         User user = userService.findByEmail(email);
 
         if(user != null) {
             if(passwordEncoder.matches(password, user.getPassword())) {
                 return BaseResponse.success("ok");
             } else {
-                return BaseResponse.error(12003,"password not match");
+                logger.info("password not match");
+                return BaseResponse.error(ErrorCode.INCORRECT_PASSWORD);
             }
         } else {
-            return BaseResponse.error(12002,"not found");
+            logger.error("user not found");
+            return BaseResponse.error(ErrorCode.NO_EXIST);
         }
     }
 }
