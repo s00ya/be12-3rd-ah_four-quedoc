@@ -6,11 +6,11 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":api-hospital"))
+    implementation project(':api-hospital')
     implementation project(':api-user')
-//    implementation project(':api-reservation')
+    implementation project(':api-reservation')
 
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
