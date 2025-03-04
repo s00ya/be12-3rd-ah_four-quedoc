@@ -29,7 +29,7 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@Tag(name="API", description = "User API 입니다.")
+@Tag(name="USER API", description = "User API 입니다.")
 public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
