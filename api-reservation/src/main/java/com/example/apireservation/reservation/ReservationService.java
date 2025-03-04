@@ -1,7 +1,12 @@
 package com.example.apireservation.reservation;
 
+import com.example.admin.user.service.UserService;
 import com.example.apireservation.reservation.model.Reservation;
+import com.example.core.common.CustomException;
+import com.example.core.common.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,31 +16,50 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class ReservationService {
+    private static final Logger logger = LogManager.getLogger(ReservationService.class);
     public final ReservationRepository reservationRepository;
 
 
-    public void save (Reservation reservation) throws Exception {
-        reservationRepository.save(reservation);
+    public void save (Reservation reservation) {
+        logger.info("save reservation");
+        try {
+            reservationRepository.save(reservation);
+        } catch (Exception e) {
+            logger.error("save reservation error", e);
+            throw new CustomException(ErrorCode.RESERVATION_SAVE_FAIL);
+        }
     }
-    public int delete (Long idx)  {
+    public void delete (Long idx)  {
+        logger.info("delete reservation");
         Optional<Reservation> reservation = reservationRepository.findById(idx);
-
         if (!reservation.isPresent()) {
-            // 존재하지 않는 예약일 경우 예외를 던짐
-            return 1; // 예를 들어, 존재하지 않는 경우는 1 반환
+            logger.error("no reservation found");
+            throw new CustomException(ErrorCode.NO_RESERVATION_EXIST);
         }
         try {
             reservationRepository.deleteById(idx);
-            return 0;
         } catch (EmptyResultDataAccessException e) {
-            return 1;
+            logger.error("no reservation found");
+            throw new CustomException(ErrorCode.NO_DATA);
         } catch (Exception e) {
-            return 2;
+            logger.error("delete reservation error", e);
+            throw new CustomException(ErrorCode.RESERVATION_DELETE_FAIL);
         }
     }
-    public Reservation findByIdx(Long idx) throws Exception {
-        Optional<Reservation> reservationOptional = reservationRepository.findById(idx);
-        return reservationOptional.orElse(null);
+    public Reservation findByIdx(Long idx) {
+        logger.info("findByIdx reservation");
+        Optional<Reservation> reservationOptional = null;
+        try {
+            reservationOptional = reservationRepository.findById(idx);
+            if(!reservationOptional.isPresent()) {
+                logger.error("no reservation found");
+                throw new CustomException(ErrorCode.NO_RESERVATION_EXIST);
+            }
+        } catch (Exception e) {
+            logger.error("findByIdx reservation error", e);
+            throw new CustomException(ErrorCode.NO_DATA);
+        }
+        return reservationOptional.get();
     }
 
 }

@@ -17,9 +17,12 @@ public enum ErrorCode {
     NO_EXIST(12008,"사용자를 찾을 수 없습니다."),
     AUTHENTICATION_FAIL(12009,"인증 실패 오류"),
 
-    INVALID_INPUT(400, "잘못된 입력입니다."),
-    RESOURCE_NOT_FOUND(404, "요청한 리소스를 찾을 수 없습니다."),
-    INTERNAL_SERVER_ERROR(500, "서버 내부 오류가 발생했습니다.");
+    // Reservation 관련 ErrorCode
+    RESERVATION_FAIL(52000, "예약 실패."),
+    RESERVATION_SAVE_FAIL(52001,"예약 저장 실패"),
+    NO_DATA(52002,"조회된 데이터 없음"),
+    RESERVATION_DELETE_FAIL(52003,"예약 삭제 실패"),
+    NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다.");
 
     private final int status;
     private final String message;
@@ -28,5 +31,4 @@ public enum ErrorCode {
         this.status = status;
         this.message = message;
     }
-
 }
