@@ -1,6 +1,7 @@
 package com.example.search;
 
 import com.example.hospital.hospital.model.Hospital;
+import com.example.core.common.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,21 +17,14 @@ public class SearchController {
 
     private final SearchService searchService;
 
-    // 모든 병원 조회
-    @GetMapping
-    public List<Hospital> getAllSearch() {
-        return searchService.getAllSearch();
-    }
+    @GetMapping("/hospitals")
+    public BaseResponse<List<Hospital>> searchHospitals(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String specialty,
+            @RequestParam(required = false) String location) {
 
-    // 이름으로 병원 검색
-    @GetMapping("/search")
-    public List<Hospital> searchByName(@RequestParam String name) {
-        return searchService.searchByName(name);
-    }
-
-    // 주소로 병원 검색
-    @GetMapping("/search/address")
-    public List<Hospital> searchByAddress(@RequestParam String address) {
-        return searchService.searchByAddress(address);
+        // 병원 검색 서비스 호출
+        return searchService.searchHospitals(keyword, type, specialty, location);
     }
 }
