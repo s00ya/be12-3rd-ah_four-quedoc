@@ -2,6 +2,7 @@ package com.example.hospital.notice.model;
 
 
 import com.example.hospital.hospital.model.Hospital;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Notice {
         createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES); // 초 제거
     }
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_idx", nullable = false)
     private Hospital hospital;
