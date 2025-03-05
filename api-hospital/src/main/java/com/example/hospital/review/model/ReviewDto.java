@@ -42,7 +42,7 @@ public class ReviewDto {
         private int score;
         private LocalDate createdAt;
         private boolean isPublic;
-        private Long hospitalId;
+        private Long hospitalIdx;
 
         public static ReviewResponse of(Review entity) {
             return ReviewResponse.builder()
@@ -53,7 +53,7 @@ public class ReviewDto {
                     .score(entity.getScore())
                     .createdAt(entity.getCreatedAt())
                     .isPublic(entity.isPublic())
-                    .hospitalId(entity.getIdx())
+                    .hospitalIdx(entity.getIdx())
                     .build();
         }
     }

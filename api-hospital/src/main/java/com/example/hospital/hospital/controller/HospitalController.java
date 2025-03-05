@@ -2,6 +2,7 @@ package com.example.hospital.hospital.controller;
 
 import com.example.core.common.BaseResponse;
 import com.example.hospital.hospital.model.Hospital;
+import com.example.hospital.hospital.model.HospitalDetailDto;
 import com.example.hospital.hospital.model.HospitalDto;
 import com.example.hospital.hospital.service.HospitalService;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +32,12 @@ public class HospitalController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{idx}")
-    public ResponseEntity findHospitalById(@PathVariable Long idx) {
-        Optional<Hospital> hospital = hospitalService.findById(idx);
-
-        return ResponseEntity.ok(hospital.get());
-    }
+//    @GetMapping("/{idx}")
+//    public ResponseEntity findHospitalById(@PathVariable Long idx) {
+//        Optional<Hospital> hospital = hospitalService.findById(idx);
+//
+//        return ResponseEntity.ok(hospital.get());
+//    }
 
     @PostMapping("/name")
     public ResponseEntity<List<HospitalDto.HospitalResponse>> findHospitalByName(@RequestBody HospitalDto.HospitalRequest dto) {
@@ -59,6 +60,14 @@ public class HospitalController {
     @GetMapping("/test")
     public BaseResponse<String> test() {
         return BaseResponse.success("ok");
+    }
+
+    @GetMapping("/{hospital_idx}")
+    public ResponseEntity<HospitalDetailDto.HospitalDetailResponse> findHospitalByIdx(@PathVariable("hospital_idx") Long hospitalIdx) {
+
+        HospitalDetailDto.HospitalDetailResponse hospitalDetail = hospitalService.findHospitalByIdx(hospitalIdx);
+
+        return ResponseEntity.ok(hospitalDetail);
     }
 
 }
