@@ -5,16 +5,15 @@ import com.example.admin.user.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import com.example.hospital.hospital.model.Hospital;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity
 @Builder
 @Schema(description = "예약 정보를 저장하는 Reservation Entity")

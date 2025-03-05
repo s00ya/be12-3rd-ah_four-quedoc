@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -20,10 +21,18 @@ public class ReservationService {
     public final ReservationRepository reservationRepository;
 
 
-    public void save (Reservation reservation) {
+    @Transactional
+    public Reservation save (Reservation reservation) {
         logger.info("save reservation");
+        // 예약 시간이 이미 존재하는지 확인 (기존 예약 시간대와 겹치는지 체크)
+        LocalDateTime startTime = reservation.getTime().minusMinutes(5);
+        LocalDateTime endTime = startTime.plusMinutes(5); // 앞뒤로 5분 예약 시간
         try {
-            reservationRepository.save(reservation);
+            if (reservationRepository.findByHospitalAndTimeBetween(reservation.getHospital().getIdx(), startTime, endTime).isPresent()) {
+                logger.error("save reservation already exists");
+                throw new CustomException(ErrorCode.RESERVATION_ALREADY_EXIST);
+            }
+            return reservationRepository.save(reservation);
         } catch (Exception e) {
             logger.error("save reservation error", e);
             throw new CustomException(ErrorCode.RESERVATION_SAVE_FAIL);
