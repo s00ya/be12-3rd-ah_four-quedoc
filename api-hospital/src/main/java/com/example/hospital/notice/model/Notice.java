@@ -1,6 +1,7 @@
 package com.example.hospital.notice.model;
 
 
+import com.example.hospital.hospital.model.Hospital;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Notice {
     private Long id;
     private String title;
     private String content;
-    private String hospitalId;
+
     @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
@@ -27,5 +28,9 @@ public class Notice {
     protected void onCreate() {
         createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES); // 초 제거
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_idx", nullable = false)
+    private Hospital hospital;
 }
 

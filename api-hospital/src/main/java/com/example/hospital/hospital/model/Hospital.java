@@ -1,8 +1,11 @@
 package com.example.hospital.hospital.model;
 
+import com.example.hospital.notice.model.Notice;
+import com.example.hospital.review.model.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,5 +42,11 @@ public class Hospital {
 
     @Column(nullable = false)
     private String closeTime;
+
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notice> notices = new ArrayList<>();
 
 }
