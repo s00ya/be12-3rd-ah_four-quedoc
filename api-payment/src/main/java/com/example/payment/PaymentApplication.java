@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan(basePackages = {
         "com.example.payment.model",
-        "com.example.admin.user.model",
-        "com.example.hospital.hospital.model",
-        "com.example.apireservation.reservation.model;"
+})
+@EnableJpaRepositories(basePackages = {
+//        "com.example.apireservation.reservation",
+        "com.example.core",
+        "com.example.payment"
 })
 public class PaymentApplication {
 
