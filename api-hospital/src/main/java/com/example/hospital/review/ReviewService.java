@@ -37,4 +37,8 @@ public class ReviewService {
 
 
     }
+    public List<ReviewDto.ReviewResponse> getReviewsByHospitalIdx(Long hospitalIdx) {
+        List<Review> reviews = reviewRepository.findByHospitalIdx(hospitalIdx);
+        return reviews.stream().map(ReviewDto.ReviewResponse::of).collect(Collectors.toList());
+    }
 }

@@ -29,7 +29,7 @@ public class NoticeDto {
         private String title;
         private String content;
         private String created_at;
-        private Long hospitalId;
+        private Long hospitalIdx;
 
         public static Response from(Notice notice) {
             Response res = new Response();
@@ -37,7 +37,7 @@ public class NoticeDto {
             res.title = notice.getTitle();
             res.content = notice.getContent();
             res.created_at = (notice.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-            res.hospitalId = notice.getHospital().getIdx();
+            res.hospitalIdx = notice.getHospital().getIdx();
             return res;
         }
     }

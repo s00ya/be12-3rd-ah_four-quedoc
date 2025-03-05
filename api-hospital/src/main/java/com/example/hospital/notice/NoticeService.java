@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +48,13 @@ public class NoticeService {
         Notice notice = noticeRepository.findByHospital_Idx(hospitalId)
                 .orElseThrow(() -> new RuntimeException("해당 병원의 공지사항을 찾을 수 없습니다."));
         return NoticeDto.Response.from(notice);
+    }
+
+    public List<NoticeDto.Response> getNoticesByHospitalIdx(Long hospitalIdx) {
+        List<Notice> notices = noticeRepository.findByHospitalIdx(hospitalIdx);
+        if (notices.isEmpty()) {
+            throw new RuntimeException("해당 병원의 공지사항을 찾을 수 없습니다.");
+        }
+        return notices.stream().map(NoticeDto.Response::from).collect(Collectors.toList());
     }
 }

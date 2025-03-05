@@ -32,4 +32,6 @@ public class Review {
     @JoinColumn(name = "hospital_idx", nullable = false)
     private Hospital hospital;
 
+    private Long hospitalId;
+
 }
