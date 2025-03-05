@@ -83,6 +83,7 @@ public class UserController {
                     .name(user.getName())
                     .nickname(user.getNickname())
                     .type(user.getType())
+                    .register(user.getRegister())
                     .build());
         } else {
             logger.error("인증 실패 오류");
@@ -115,7 +116,6 @@ public class UserController {
 
         return BaseResponse.success("Signup success");
     }
-
 
     @PostMapping("/update")
     @Operation(summary = "정보 수정", description = "사용자의 정보를 수정하는 API 입니다.")
@@ -171,4 +171,7 @@ public class UserController {
             return BaseResponse.error(ErrorCode.NO_EXIST);
         }
     }
+
+
+
 }
