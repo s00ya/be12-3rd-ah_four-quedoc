@@ -1,7 +1,11 @@
 package com.example.admin.user.service;
 
+import com.example.admin.common.EmailService;
 import com.example.admin.user.controller.UserController;
 import com.example.admin.user.model.User;
+import com.example.admin.verify.EmailVerificationRepository;
+import com.example.admin.verify.EmailVerificationService;
+import com.example.admin.verify.model.EmailVerification;
 import com.example.core.common.CustomException;
 import com.example.core.common.ErrorCode;
 import com.example.admin.user.repository.UserRepository;
@@ -15,6 +19,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +27,9 @@ public class UserService {
 
     private static final Logger logger = LogManager.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final EmailVerificationService emailVerificationService;
+    private final EmailVerificationRepository emailVerificationRepository;
+    private final EmailService emailService;
 
     public void save(@Valid User user) {
         try {

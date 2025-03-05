@@ -16,6 +16,7 @@ public enum ErrorCode {
     INCORRECT_PASSWORD(12007,"비밀번호가 다릅니다."),
     NO_EXIST(12008,"사용자를 찾을 수 없습니다."),
     AUTHENTICATION_FAIL(12009,"인증 실패 오류"),
+    EXPIRED_AUTHENTICATION(12010,"만료된 인증번호"),
 
     // Reservation 관련 ErrorCode
     RESERVATION_FAIL(52000, "예약 실패."),
