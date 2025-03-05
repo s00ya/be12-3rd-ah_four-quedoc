@@ -1,9 +1,11 @@
 package com.example.admin.user.controller;
 
 
+import com.example.admin.common.EmailService;
 import com.example.admin.user.model.User;
 import com.example.admin.user.model.UserDto;
 import com.example.admin.user.service.UserService;
+import com.example.admin.verify.EmailVerificationService;
 import com.example.core.common.BaseResponse;
 import com.example.core.common.ErrorCode;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,8 +36,10 @@ public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     private final UserService userService;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final EmailVerificationService emailVerificationService;
 
     @GetMapping("/test")
     @Operation(summary = "테스트", description = "접속이 잘 되는지 테스트하는 API 입니다.")
@@ -44,6 +48,8 @@ public class UserController {
         logger.error("error 로그 - 경고 발생");
         logger.error("ERROR 로그 - 에러 발생");
         logger.info(headers);
+
+        emailService.sendHtmlEmail("cksdudtj0221@gmail.com","test메일이에요","304912");
         return BaseResponse.success("ok");
     }
 
@@ -83,6 +89,7 @@ public class UserController {
                     .name(user.getName())
                     .nickname(user.getNickname())
                     .type(user.getType())
+                    .register(user.getRegister())
                     .build());
         } else {
             logger.error("인증 실패 오류");
@@ -116,7 +123,6 @@ public class UserController {
 
         return BaseResponse.success("Signup success");
     }
-
 
     @PostMapping("/update")
     @Operation(summary = "정보 수정", description = "사용자의 정보를 수정하는 API 입니다.")
@@ -172,4 +178,29 @@ public class UserController {
             return BaseResponse.error(ErrorCode.NO_EXIST);
         }
     }
+
+    @PostMapping("/emailVerification")
+    @Operation(summary = "이메일 인증번호 발송", description = "회원의 비밀번호를 찾기위해 email로 인증번호를 발송하는 API 입니다.")
+    public BaseResponse<String> emailVerify(@RequestParam String email) {
+        logger.info("emailVerify api");
+        User user = userService.findByEmail(email);
+        if(user != null) {
+            String code = emailVerificationService.createVerificationCode(email);
+            emailService.sendHtmlEmail(email,"[Quedoc] 이메일 인증",code);
+
+        } else {
+            logger.error("user not found");
+            return BaseResponse.error(ErrorCode.NO_EXIST);
+        }
+        return BaseResponse.success("ok");
+    }
+    @GetMapping("/verify")
+    @Operation(summary = "이메일 인증번호 확인", description = "회원의 비밀번호를 찾기위해 인증번호를 받아 검사하는 API 입니다.")
+    public BaseResponse<String> verifyCode(@RequestParam String email, @RequestParam String code) {
+        logger.info("verifyCode api");
+        boolean isValid = emailVerificationService.verifyCode(email, code);
+        return isValid ? BaseResponse.success("ok") : BaseResponse.error(ErrorCode.AUTHENTICATION_FAIL);
+    }
+
+
 }
