@@ -1,6 +1,7 @@
 package com.example.hospital.notice.model;
 
 
+import com.example.hospital.hospital.model.Hospital;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -13,11 +14,11 @@ public class NoticeDto {
         private Long id;
         private String title;
         private String content;
-        private String hospitalId;
         private LocalDateTime created_at;
+        private Long hospitalId;
 
-        public Notice toEntity() {
-            Notice notice = new Notice(null, title, content, hospitalId, created_at);
+        public Notice toEntity(Hospital hospital) {
+            Notice notice = new Notice(null, title, content, created_at, hospital);
             return notice;
         }
     }
@@ -27,8 +28,8 @@ public class NoticeDto {
         private Long idx;
         private String title;
         private String content;
-        private String hospitalId;
         private String created_at;
+        private Long hospitalId;
 
         public static Response from(Notice notice) {
             Response res = new Response();
@@ -36,7 +37,7 @@ public class NoticeDto {
             res.title = notice.getTitle();
             res.content = notice.getContent();
             res.created_at = (notice.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-            res.hospitalId = notice.getHospitalId();
+            res.hospitalId = notice.getHospital().getIdx();
             return res;
         }
     }

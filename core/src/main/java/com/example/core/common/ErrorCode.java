@@ -23,7 +23,18 @@ public enum ErrorCode {
     RESERVATION_SAVE_FAIL(52001,"예약 저장 실패"),
     NO_DATA(52002,"조회된 데이터 없음"),
     RESERVATION_DELETE_FAIL(52003,"예약 삭제 실패"),
-    NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다.");
+    NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다."),
+
+    // Hospital 관련 ErrorCode
+    HOSPITAL_NOT_FOUND(20000, "병원을 찾을 수 없습니다."),
+    HOSPITAL_CREATION_FAILED(20001, "병원 등록에 실패했습니다."),
+    HOSPITAL_UPDATE_FAILED(20002, "병원 정보 업데이트에 실패했습니다."),
+    HOSPITAL_DELETE_FAILED(20003, "병원 삭제에 실패했습니다."),
+    HOSPITAL_DUPLICATE(20004, "이미 존재하는 병원입니다."),
+    HOSPITAL_DETAIL_FAILED(21000, "병원 상세정보 불러오기에 실패했습니다."),
+    HOSPITAL_REVIEW_FAILED(22000, "리뷰 등록에 실패했습니다.");
+
+
 
     private final int status;
     private final String message;

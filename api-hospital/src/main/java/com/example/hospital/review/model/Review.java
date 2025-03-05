@@ -1,5 +1,7 @@
 package com.example.hospital.review.model;
 
+import com.example.hospital.hospital.model.Hospital;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,16 +27,9 @@ public class Review {
     private LocalDate createdAt;
     private boolean isPublic;
 
-//    @ManyToOne
-//    @JoinColumn(name="user_idx")
-//    private User user;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "doctor_idx")
-//    private Doctor doctor;
-//
-//    @OneToOne
-//    @JoinColumn(name="reservation_idx")
-//    private Reservation reservation;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_idx", nullable = false)
+    private Hospital hospital;
 
 }
