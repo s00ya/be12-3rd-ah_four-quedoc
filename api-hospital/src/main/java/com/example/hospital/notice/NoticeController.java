@@ -29,8 +29,8 @@ public class NoticeController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<NoticeDto.Response> search(String name) {
-        NoticeDto.Response response = noticeService.searchByName(name);
+    public ResponseEntity<NoticeDto.Response> search(@RequestParam Long hospitalId) {
+        NoticeDto.Response response = noticeService.searchByHospitalId(hospitalId);
 
         return ResponseEntity.ok(response);
     }
