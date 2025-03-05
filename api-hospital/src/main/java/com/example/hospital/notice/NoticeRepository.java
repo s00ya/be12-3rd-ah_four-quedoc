@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    Optional<Notice> findByHospitalId(String hospitalId);
+    Optional<Notice> findByHospital_Idx(Long hospitalId);
 }

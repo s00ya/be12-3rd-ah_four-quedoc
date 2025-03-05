@@ -11,7 +11,23 @@ eureka:
       defaultZone: http://localhost:8001/eureka
     register-with-eureka: true
     fetch-registry: true
+
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cksdudtj0221@gmail.com
+    password: zeqhgqqwbprihbpj
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+    test-connection: true
+
   datasource:
     url: ${DB_URL}
     driver-class-name: org.mariadb.jdbc.Driver
