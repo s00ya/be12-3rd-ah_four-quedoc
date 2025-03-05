@@ -108,6 +108,7 @@ public class UserController {
                 .phone(dto.getPhoneNumber())
                 .nickname(dto.getNickname())
                 .type(dto.getCustomerTypeCode())
+                .birthDate(dto.getBirthDate())
                 .register(false)
                 .build();
 
