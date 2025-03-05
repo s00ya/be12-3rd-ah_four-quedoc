@@ -82,5 +82,20 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
+    public void withdrawal(User user) {
+        try {
+            userRepository.delete(user);
+        } catch (DataAccessException e) {
+            logger.error("DataAccessException");
+            throw new CustomException(ErrorCode.DATABASE_ERROR);
+        } catch (IllegalArgumentException e) {
+            logger.error("IllegalArgumentException");
+            throw new CustomException(ErrorCode.ILLEGAL_ARGUMENT_ID);
+        } catch (Exception e) {
+            logger.error("Exception");
+            throw new CustomException(ErrorCode.DELETE_FAIL);
+        }
+    }
+
 
 }

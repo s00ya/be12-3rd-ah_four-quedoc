@@ -203,4 +203,19 @@ public class UserController {
     }
 
 
+    @PostMapping("/withdrawal")
+    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴 API 입니다.")
+    public BaseResponse<String> withdrawal(@RequestParam String email) {
+        logger.info("withdrawal api");
+        User user = userService.findByEmail(email);
+        if(user != null) {
+            userService.withdrawal(user);
+        } else {
+            logger.error("user not found");
+            return BaseResponse.error(ErrorCode.NO_EXIST);
+        }
+        return BaseResponse.success("ok");
+    }
+
+
 }
