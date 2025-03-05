@@ -1,5 +1,6 @@
 package com.example.hospital.review.model;
 
+import com.example.hospital.hospital.model.Hospital;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,19 +14,20 @@ public class ReviewDto {
         private String contents;
         private String nickName;
         private String passWord;
-        private LocalDate createdAt;
         private int score;
-        private boolean isPublic;
+        private boolean isPublic = true;
+        private Long hospitalId;
 
-        public Review toEntity() {
+        public Review toEntity(Hospital hospital) {
             return Review.builder()
                     .title(title)
                     .contents(contents)
                     .nickName(nickName)
                     .passWord(passWord)
                     .score(score)
-                    .createdAt(createdAt)
+                    .createdAt(LocalDate.now())
                     .isPublic(isPublic)
+                    .hospital(hospital)
                     .build();
         }
     }
@@ -37,10 +39,10 @@ public class ReviewDto {
         private String title;
         private String contents;
         private String nickName;
-        private String passWord;
         private int score;
         private LocalDate createdAt;
         private boolean isPublic;
+        private Long hospitalId;
 
         public static ReviewResponse of(Review entity) {
             return ReviewResponse.builder()
@@ -48,10 +50,10 @@ public class ReviewDto {
                     .title(entity.getTitle())
                     .contents(entity.getContents())
                     .nickName(entity.getNickName())
-                    .passWord(entity.getPassWord())
                     .score(entity.getScore())
                     .createdAt(entity.getCreatedAt())
                     .isPublic(entity.isPublic())
+                    .hospitalId(entity.getIdx())
                     .build();
         }
     }

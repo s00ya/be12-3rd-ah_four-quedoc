@@ -1,5 +1,7 @@
 package com.example.hospital.review;
 
+import com.example.hospital.hospital.model.Hospital;
+import com.example.hospital.hospital.repository.HospitalRepository;
 import com.example.hospital.review.model.Review;
 import com.example.hospital.review.model.ReviewDto;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +15,13 @@ import java.util.stream.Collectors;
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
+    private final HospitalRepository hospitalRepository;
 
     public ReviewDto.ReviewResponse create(ReviewDto.ReviewRequest dto) {
-        Review review = reviewRepository.save(dto.toEntity());
+        Hospital hospital = hospitalRepository.findById(dto.getHospitalId())
+                .orElseThrow(() -> new RuntimeException("병원을 찾을 수 없습니다."));
+
+        Review review = reviewRepository.save(dto.toEntity(hospital));
         return ReviewDto.ReviewResponse.of(review);
     }
 
