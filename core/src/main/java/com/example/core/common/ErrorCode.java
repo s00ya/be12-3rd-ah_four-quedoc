@@ -25,6 +25,7 @@ public enum ErrorCode {
     NO_DATA(52002,"조회된 데이터 없음"),
     RESERVATION_DELETE_FAIL(52003,"예약 삭제 실패"),
     NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다."),
+    RESERVATION_ALREADY_EXIST(52005,"이미 예약된 시간대입니다."),
 
     // Hospital 관련 ErrorCode
     HOSPITAL_NOT_FOUND(20000, "병원을 찾을 수 없습니다."),

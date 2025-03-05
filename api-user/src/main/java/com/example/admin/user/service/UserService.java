@@ -52,6 +52,9 @@ public class UserService {
         try {
             logger.info("findByEmail");
             optionalUser = userRepository.findByEmail(email);
+            if(!optionalUser.isPresent()) {
+                throw new CustomException(ErrorCode.NO_EXIST);
+            }
         } catch (DataAccessException e) {   // 데이터베이스 관련 예외
             logger.error("DataAccessException");
             throw new CustomException(ErrorCode.DATABASE_ERROR);
@@ -62,13 +65,16 @@ public class UserService {
             logger.error("Exception");
             throw new CustomException(ErrorCode.SAVE_FAILED);
         }
-        return optionalUser.orElse(null);
+        return optionalUser.get();
     }
     public User findById(Long id) {
         Optional<User> optionalUser = null;
         try {
             logger.info("findById");
             optionalUser = userRepository.findById(id);
+            if(!optionalUser.isPresent()) {
+                throw new CustomException(ErrorCode.NO_EXIST);
+            }
         } catch (DataAccessException e) {   // 데이터베이스 관련 예외
             logger.error("DataAccessException");
             throw new CustomException(ErrorCode.DATABASE_ERROR);
@@ -79,7 +85,7 @@ public class UserService {
             logger.error("Exception");
             throw new CustomException(ErrorCode.SAVE_FAILED);
         }
-        return optionalUser.orElse(null);
+        return optionalUser.get();
     }
 
     public void withdrawal(User user) {
