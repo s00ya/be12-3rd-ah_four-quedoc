@@ -1,14 +1,14 @@
-package com.example.hospital.review;
+package com.example.hospital.review.service;
 
 import com.example.hospital.hospital.model.Hospital;
 import com.example.hospital.hospital.repository.HospitalRepository;
+import com.example.hospital.review.repository.ReviewRepository;
 import com.example.hospital.review.model.Review;
 import com.example.hospital.review.model.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor

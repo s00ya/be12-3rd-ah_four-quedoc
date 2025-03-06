@@ -67,7 +67,7 @@ public class ReservationController {
         return BaseResponse.success(responseDto);
     }
 
-    @GetMapping("/get/{reservationIdx}")
+    @GetMapping("/update/{reservationIdx}")
     @Operation(summary = "예약 변경", description = "예약을 변경하는 API 입니다.")
     public BaseResponse<Reservation> updateReservation(@RequestBody ReservationDto.updateDto dto) {
         logger.info("Get reservation api");

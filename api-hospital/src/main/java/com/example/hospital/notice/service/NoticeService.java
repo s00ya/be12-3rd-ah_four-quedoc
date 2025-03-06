@@ -1,8 +1,8 @@
-package com.example.hospital.notice;
+package com.example.hospital.notice.service;
 
 import com.example.hospital.hospital.model.Hospital;
 import com.example.hospital.hospital.repository.HospitalRepository;
-import com.example.hospital.hospital.service.HospitalService;
+import com.example.hospital.notice.repository.NoticeRepository;
 import com.example.hospital.notice.model.Notice;
 import com.example.hospital.notice.model.NoticeDto;
 import lombok.RequiredArgsConstructor;

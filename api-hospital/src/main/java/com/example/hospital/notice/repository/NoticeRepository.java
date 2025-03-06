@@ -1,4 +1,4 @@
-package com.example.hospital.notice;
+package com.example.hospital.notice.repository;
 
 import com.example.hospital.notice.model.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
