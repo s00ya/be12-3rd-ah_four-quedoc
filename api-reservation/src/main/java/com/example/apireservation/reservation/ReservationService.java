@@ -19,8 +19,6 @@ public class ReservationService {
     private static final Logger logger = LogManager.getLogger(ReservationService.class);
     public final ReservationRepository reservationRepository;
 
-
-    @Transactional
     public Reservation save (Reservation reservation) {
         // 예약 시간이 이미 존재하는지 확인 (기존 예약 시간대와 겹치는지 체크)
         try {
