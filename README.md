@@ -79,8 +79,8 @@
 
 ---
 
-<h1>프로젝트 관련 문서 📑</h1>
-<h2><a href="https://docs.google.com/spreadsheets/d/1x-hlYdYcrdf4xKSMesXhxJlb9vGeqBC7GFpo4s2X_9w/edit?usp=sharing" target="_blank">요구사항 명세서</a></h2>
+<h2>프로젝트 관련 문서 📑</h2>
+<h3><a href="https://docs.google.com/spreadsheets/d/1x-hlYdYcrdf4xKSMesXhxJlb9vGeqBC7GFpo4s2X_9w/edit?usp=sharing" target="_blank">요구사항 명세서</a></h3>
 <br>
 <h2>ERD 📊</h2>
 <h3><a href="https://github.com/beyond-sw-camp/be12-1st-ah_four-quedoc/blob/main/image/ERD.png" target="_blank">ERD 테이블</a></h3>
@@ -88,6 +88,16 @@
 <br>
 <h2>Swagger 📜</h2>
 <h3><a href="http://www.cheeeze.kro.kr/" target="_blank">Swagger 링크</a></h3>
+
+<br>
+<h2>시스템 아키텍처 🖥️</h2>
+<h3><a href="https://github.com/beyond-sw-camp/be12-3rd-ah_four-quedoc/wiki/1.-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98" target="_blank">시스템 아키텍처</a></h3>
+
+
+<br>
+<h2>코드 컨벤션 🔍</h2>
+<h3><a href="https://github.com/beyond-sw-camp/be12-3rd-ah_four-quedoc/wiki/3.-%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank">컨벤션 내용</a></h3>
+
 
 ---
 
