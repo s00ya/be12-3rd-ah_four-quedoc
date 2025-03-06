@@ -41,18 +41,6 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final EmailVerificationService emailVerificationService;
 
-    @GetMapping("/test")
-    @Operation(summary = "테스트", description = "접속이 잘 되는지 테스트하는 API 입니다.")
-    public BaseResponse<String> test(@RequestHeader HttpHeaders headers) {
-        logger.info("INFO 로그 - 일반적인 정보");
-        logger.error("error 로그 - 경고 발생");
-        logger.error("ERROR 로그 - 에러 발생");
-        logger.info(headers);
-
-        emailService.sendHtmlEmail("cksdudtj0221@gmail.com","test메일이에요","304912");
-        return BaseResponse.success("ok");
-    }
-
     @PostMapping("/login")
     @Operation(summary = "로그인", description = "이메일, 비밀번호로 로그인, 인증 후 JWT 토큰을 반환하는 API 입니다.")
     public BaseResponse<UserDto.ResponseDto> login(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
@@ -118,6 +106,10 @@ public class UserController {
                 .register(false)
                 .build();
 
+        if(user.getType().equals("B")) {
+            user.setBusinessNumber(dto.getBusinessNumber());
+        }
+
         userService.save(user);
 
         return BaseResponse.success("Signup success");
@@ -146,6 +138,7 @@ public class UserController {
                     .name(user.getName())
                     .nickname(user.getNickname())
                     .type(user.getType())
+                    .register(user.getRegister())
                     .build();
             return BaseResponse.success(responseDto);
     }
