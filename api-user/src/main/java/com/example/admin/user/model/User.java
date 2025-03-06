@@ -43,6 +43,8 @@ public class User {
     @Schema(description = "User의 회원 타입, 일반사용자 - U, 사업자 - B", example = "U")
     private String type;
 
+    @Schema(description = "User가 사업자일때 등록하는 사업자번호", example = "454-04-01752")
+    private String businessNumber;
 
     @Schema(description = "User가 사업자인 경우, 병원 정보 등록 유무", example = "false")
     private Boolean register;
