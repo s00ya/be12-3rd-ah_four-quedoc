@@ -83,7 +83,7 @@
 <h3><a href="https://docs.google.com/spreadsheets/d/1x-hlYdYcrdf4xKSMesXhxJlb9vGeqBC7GFpo4s2X_9w/edit?usp=sharing" target="_blank">요구사항 명세서</a></h3>
 <br>
 <h2>ERD 📊</h2>
-<h3><a href="https://github.com/beyond-sw-camp/be12-1st-ah_four-quedoc/blob/main/image/ERD.png" target="_blank">ERD 테이블</a></h3>
+<h3><a href="https://github.com/beyond-sw-camp/be12-3rd-ah_four-quedoc/blob/main/assets/erd.png" target="_blank">ERD 테이블</a></h3>
 
 <br>
 <h2>Swagger 📜</h2>
