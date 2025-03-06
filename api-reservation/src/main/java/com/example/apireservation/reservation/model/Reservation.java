@@ -1,10 +1,7 @@
 package com.example.apireservation.reservation.model;
 
-
-import com.example.admin.user.model.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import com.example.hospital.hospital.model.Hospital;
 import lombok.*;
 
 
@@ -34,11 +31,14 @@ public class Reservation {
     private String name;
 
     @Column(nullable = false)
+    @Schema(description = "병원 방문자의 전화번호", example = "01049282912")
     private String phoneNumber;
 
+    @Schema(description = "요청사항", example = "잘 부탁드립니다.")
     private String content;
 
     @Column(nullable = false)
+    @Schema(description = "예약 승인 여부", example = "false")
     private Boolean isApproved;
 
 }
