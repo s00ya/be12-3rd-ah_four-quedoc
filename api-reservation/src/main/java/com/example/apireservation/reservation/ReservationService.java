@@ -28,7 +28,7 @@ public class ReservationService {
         LocalDateTime startTime = reservation.getTime().minusMinutes(5);
         LocalDateTime endTime = startTime.plusMinutes(5); // 앞뒤로 5분 예약 시간
         try {
-            if (reservationRepository.findByHospitalAndTimeBetween(reservation.getHospital().getIdx(), startTime, endTime).isPresent()) {
+            if (reservationRepository.findByHospitalAndTimeBetween(reservation.getHospital(), startTime, endTime).isPresent()) {
                 logger.error("save reservation already exists");
                 throw new CustomException(ErrorCode.RESERVATION_ALREADY_EXIST);
             }

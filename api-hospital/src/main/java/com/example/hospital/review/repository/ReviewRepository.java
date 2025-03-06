@@ -1,4 +1,4 @@
-package com.example.hospital.review;
+package com.example.hospital.review.repository;
 
 import com.example.hospital.review.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;

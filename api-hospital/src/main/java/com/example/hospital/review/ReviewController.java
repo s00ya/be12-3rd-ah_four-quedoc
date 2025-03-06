@@ -2,6 +2,7 @@ package com.example.hospital.review;
 
 
 import com.example.hospital.review.model.ReviewDto;
+import com.example.hospital.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

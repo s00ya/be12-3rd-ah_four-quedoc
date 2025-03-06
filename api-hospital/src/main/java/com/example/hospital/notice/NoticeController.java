@@ -2,6 +2,7 @@ package com.example.hospital.notice;
 
 import com.example.hospital.notice.model.Notice;
 import com.example.hospital.notice.model.NoticeDto;
+import com.example.hospital.notice.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
