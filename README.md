@@ -82,14 +82,12 @@
 <h1>프로젝트 관련 문서 📑</h1>
 <h2><a href="https://docs.google.com/spreadsheets/d/1x-hlYdYcrdf4xKSMesXhxJlb9vGeqBC7GFpo4s2X_9w/edit?usp=sharing" target="_blank">요구사항 명세서</a></h2>
 <br>
-<img src="https://github.com/user-attachments/assets/5ee66934-1b5c-48e2-94eb-0fd7b6b6b698" />
-
-<h2>
 <h2>ERD 📊</h2>
-<img src="https://github.com/user-attachments/assets/927bfb43-363c-4b96-bbca-50b52d4edf02" />
-  
+<h3><a href="https://github.com/beyond-sw-camp/be12-1st-ah_four-quedoc/blob/main/image/ERD.png" target="_blank">ERD 테이블</a></h3>
+
+<br>
 <h2>Swagger 📜</h2>
-<a href="http://www.cheeeze.kro.kr/" target="_blank">Swagger 링크</a>
+<h3><a href="http://www.cheeeze.kro.kr/" target="_blank">Swagger 링크</a></h3>
 
 ---
 
