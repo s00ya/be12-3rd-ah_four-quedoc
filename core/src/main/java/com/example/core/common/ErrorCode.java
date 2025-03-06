@@ -27,6 +27,10 @@ public enum ErrorCode {
     NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다."),
     RESERVATION_ALREADY_EXIST(52005,"이미 예약된 시간대입니다."),
 
+    // Board 관련 ErrorCode
+    BOARD_SAVE_FAIL(62001,"게시글 저장 실패"),
+    BOARD_LOAD_FAIL(62002,"게시글 불러오기 실패"),
+
     // Hospital 관련 ErrorCode
     HOSPITAL_NOT_FOUND(20000, "병원을 찾을 수 없습니다."),
     HOSPITAL_CREATION_FAILED(20001, "병원 등록에 실패했습니다."),

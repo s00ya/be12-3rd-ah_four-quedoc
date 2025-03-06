@@ -1,9 +1,7 @@
 package com.example.apiboard.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -38,6 +36,14 @@ public class BoardDto {
         private String author;
         @Schema(description = "게시글의 작성 시각", required = true, example = "2025-03-06 14:23:03")
         private LocalDateTime createdAt;
+
+        public responseDto(Board board) {
+            this.idx = board.getIdx();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.author = board.getAuthor();
+            this.createdAt = board.getCreatedAt();
+        }
     }
 
 }

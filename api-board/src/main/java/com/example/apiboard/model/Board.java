@@ -33,4 +33,5 @@ public class Board {
 
     @Schema(description = "게시글의 작성 시각", required = true, example = "2025-03-06 14:23:03")
     private LocalDateTime createdAt;
+
 }
