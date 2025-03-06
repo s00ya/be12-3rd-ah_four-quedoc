@@ -8,8 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class ReservationDto {
 
@@ -17,10 +15,11 @@ public class ReservationDto {
     @Setter
     @Schema(description = "Reservation 예약을 위한 dto")
     public static class requestDto {
-        private Long user_id;
+        private Long user_idx;
         private Long hospital_idx;
         private String name;
-        private String date;
+        private String phoneNumber;
+        private String content;
     }
 
     @Getter
@@ -28,10 +27,13 @@ public class ReservationDto {
     @Builder
     @Schema(description = "Reservation 조회을 위한 dto")
     public static class responseDto {
-        private User user;
-        private Hospital hospital;
+        private Long idx;
+        private Long user_idx;
+        private Long hospital_idx;
         private String name;
-        private String date;
+        private String phoneNumber;
+        private String content;
+        private Boolean isApproved;
 
     }
 
@@ -41,6 +43,7 @@ public class ReservationDto {
     public static class updateDto {
         private Long idx;
         private String name;
-        private LocalDateTime date;
+        private String phoneNumber;
+        private String content;
     }
 }

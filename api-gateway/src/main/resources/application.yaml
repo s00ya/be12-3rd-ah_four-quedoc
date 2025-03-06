@@ -28,7 +28,13 @@ spring:
           uri: lb://api-hospital
           predicates:
             - Path=/hospital/**
+        - id: api-notice
+          uri: lb://api-hospital
+          predicates:
             - Path=/notice/**
+        - id: api-review
+          uri: lb://api-hospital
+          predicates:
             - Path=/review/**
         - id: api-reservation
           uri: lb://api-reservation
