@@ -117,3 +117,5 @@
 /api-user/build/classes/java/main/com/example/admin/user/repository/UserRepository.class
 /api-user/build/classes/java/main/com/example/admin/user/service/UserService.class
 /api-user/build/tmp/compileJava/compileTransaction/stash-dir/UserService.class.uniqueId1
+api-hospital/build/
+gradle.properties
