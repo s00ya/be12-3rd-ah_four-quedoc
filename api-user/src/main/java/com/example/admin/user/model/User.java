@@ -17,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(description = "User 테이블의 primary key, auto_increment", example = "1")
-    private Long id;
+    private Long idx;
 
     @Column(nullable = false)
     @Schema(description = "User의 이름, 2~20자 사이", example = "홍길동")
@@ -38,10 +38,6 @@ public class User {
     @Column(nullable = false)
     @Schema(description = "User의 별명, 3~15자 사이", example = "길동이")
     private String nickname;
-
-    @Column(nullable = false)
-    @Schema(description = "User의 생년월일", example = "010322")
-    private String birthDate;
 
     @Column(nullable = false)
     @Schema(description = "User의 회원 타입, 일반사용자 - U, 사업자 - B", example = "U")
