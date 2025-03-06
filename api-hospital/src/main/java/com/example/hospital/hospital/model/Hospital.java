@@ -49,7 +49,6 @@ public class Hospital {
     @OneToMany(mappedBy = "hospital")
     private List<Review> reviews = new ArrayList<>();
 
-
     @JsonManagedReference
     @OneToMany(mappedBy = "hospital")
     private List<Notice> notices = new ArrayList<>();
