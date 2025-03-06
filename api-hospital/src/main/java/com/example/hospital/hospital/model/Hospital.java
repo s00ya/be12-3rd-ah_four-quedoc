@@ -31,7 +31,6 @@ public class Hospital {
     @Column(nullable = false)
     private String phoneNumber;
 
-
     @Column(nullable = false)
     private String type;
 

@@ -25,4 +25,9 @@ spring:
           predicates:
             - Path=/user/**
 
+        - id: api-search
+          uri: lb://api-search
+          predicates:
+            - Path=/search/**
+
 
