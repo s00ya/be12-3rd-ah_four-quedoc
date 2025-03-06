@@ -15,7 +15,7 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "User 테이블의 primary key, auto_increment", example = "1")
     private Long idx;
 
