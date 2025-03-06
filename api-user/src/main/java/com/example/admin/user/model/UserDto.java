@@ -38,7 +38,6 @@ public class UserDto {
         private String name;
         private String password;
         private String nickname;
-        private String birthDate;
         private String phoneNumber;
         private String customerTypeCode;
     }
@@ -65,8 +64,6 @@ public class UserDto {
         @NotBlank(message = "닉네임을 입력하세요.")
         @Size(min = 3, max = 15, message = "닉네임은 3~15자 사이여야 합니다.")
         private String nickname;
-
-        private String birthDate;
 
         @NotBlank(message = "전화번호를 입력하세요.")
         @Pattern(
