@@ -89,7 +89,7 @@
 <img src="https://github.com/user-attachments/assets/927bfb43-363c-4b96-bbca-50b52d4edf02" />
   
 <h2>Swagger 📜</h2>
-<h3>API 문서 링크</h3>
+<a href="http://www.cheeeze.kro.kr/" target="_blank">Swagger 링크</a>
 
 ---
 
