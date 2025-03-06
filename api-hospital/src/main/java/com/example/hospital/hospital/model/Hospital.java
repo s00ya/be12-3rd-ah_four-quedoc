@@ -27,13 +27,14 @@ public class Hospital {
 
     @Column(nullable = true)
     private String department;
+    // 진료과목 소아과,
 
     @Column(nullable = false)
     private String phoneNumber;
 
-
     @Column(nullable = false)
     private String type;
+    // 병원 종류 종합병원, 소형병원
 
     @Column(nullable = false)
     private String detailAddress;

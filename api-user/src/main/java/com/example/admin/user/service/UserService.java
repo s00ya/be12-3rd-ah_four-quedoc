@@ -27,9 +27,6 @@ public class UserService {
 
     private static final Logger logger = LogManager.getLogger(UserService.class);
     private final UserRepository userRepository;
-    private final EmailVerificationService emailVerificationService;
-    private final EmailVerificationRepository emailVerificationRepository;
-    private final EmailService emailService;
 
     public void save(@Valid User user) {
         try {
