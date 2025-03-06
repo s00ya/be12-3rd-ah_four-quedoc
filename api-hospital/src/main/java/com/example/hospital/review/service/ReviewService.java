@@ -1,14 +1,21 @@
 package com.example.hospital.review.service;
 
+import com.example.core.common.CustomException;
+import com.example.core.common.ErrorCode;
 import com.example.hospital.hospital.model.Hospital;
 import com.example.hospital.hospital.repository.HospitalRepository;
 import com.example.hospital.review.repository.ReviewRepository;
 import com.example.hospital.review.model.Review;
 import com.example.hospital.review.model.ReviewDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -16,12 +23,22 @@ import java.util.stream.Collectors;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final HospitalRepository hospitalRepository;
+    private static final Logger logger = LogManager.getLogger(ReviewService.class);
 
+    @Transactional
     public ReviewDto.ReviewResponse create(ReviewDto.ReviewRequest dto) {
-        Hospital hospital = hospitalRepository.findById(dto.getHospitalId())
-                .orElseThrow(() -> new RuntimeException("병원을 찾을 수 없습니다."));
+        logger.info("Create review for hospitalIdx: {}", dto.getHospitalIdx());
 
-        Review review = reviewRepository.save(dto.toEntity(hospital));
+        hospitalRepository.findById(dto.getHospitalIdx())
+                .orElseThrow(() -> new CustomException(ErrorCode.HOSPITAL_NOT_FOUND));
+
+        Optional<Review> existingReview = reviewRepository.findByHospitalIdxAndUserIdx(dto.getHospitalIdx(), dto.getUserIdx());
+        if (existingReview.isPresent()) {
+            logger.error("Review already exists for hospitalIdx: {}", dto.getHospitalIdx());
+            throw new CustomException(ErrorCode.REVIEW_ALREADY_EXIST);
+        }
+
+        Review review = reviewRepository.save(dto.toEntity());
         return ReviewDto.ReviewResponse.of(review);
     }
 
@@ -40,5 +57,26 @@ public class ReviewService {
     public List<ReviewDto.ReviewResponse> getReviewsByHospitalIdx(Long hospitalIdx) {
         List<Review> reviews = reviewRepository.findByHospitalIdx(hospitalIdx);
         return reviews.stream().map(ReviewDto.ReviewResponse::of).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long reviewIdx) {
+        logger.info("Delete review with reviewIdx: {}", reviewIdx);
+
+        Optional<Review> review = reviewRepository.findById(reviewIdx);
+        if (!review.isPresent()) {
+            logger.error("No review found with reviewIdx: {}", reviewIdx);
+            throw new CustomException(ErrorCode.NO_REVIEW_EXIST);
+        }
+
+        try {
+            reviewRepository.deleteById(reviewIdx);
+        } catch (EmptyResultDataAccessException e) {
+            logger.error("No review found to delete with reviewIdx: {}", reviewIdx);
+            throw new CustomException(ErrorCode.NO_REVIEW_EXIST);
+        } catch (Exception e) {
+            logger.error("Failed to delete review with reviewIdx: {}", reviewIdx, e);
+            throw new CustomException(ErrorCode.REVIEW_DELETE_FAILED);
+        }
     }
 }
