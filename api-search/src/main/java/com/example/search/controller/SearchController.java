@@ -15,7 +15,7 @@ public class SearchController {
 
     private final SearchService searchService;
 
-    // ✅ 전체 병원 조회
+    // ✅ 전체 병원 조회.
     @GetMapping("/list")
     public BaseResponse<List<HospitalDto.HospitalResponse>> getAllHospitals() {
         return searchService.findAllHospitals();
