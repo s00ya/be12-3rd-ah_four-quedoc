@@ -41,18 +41,6 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final EmailVerificationService emailVerificationService;
 
-    @GetMapping("/test")
-    @Operation(summary = "테스트", description = "접속이 잘 되는지 테스트하는 API 입니다.")
-    public BaseResponse<String> test(@RequestHeader HttpHeaders headers) {
-        logger.info("INFO 로그 - 일반적인 정보");
-        logger.error("error 로그 - 경고 발생");
-        logger.error("ERROR 로그 - 에러 발생");
-        logger.info(headers);
-
-        emailService.sendHtmlEmail("cksdudtj0221@gmail.com","test메일이에요","304912");
-        return BaseResponse.success("ok");
-    }
-
     @PostMapping("/login")
     @Operation(summary = "로그인", description = "이메일, 비밀번호로 로그인, 인증 후 JWT 토큰을 반환하는 API 입니다.")
     public BaseResponse<UserDto.ResponseDto> login(@RequestBody UserDto.LoginDto dto,HttpServletResponse response) {
@@ -115,9 +103,12 @@ public class UserController {
                 .phone(dto.getPhoneNumber())
                 .nickname(dto.getNickname())
                 .type(dto.getCustomerTypeCode())
-                .birthDate(dto.getBirthDate())
                 .register(false)
                 .build();
+
+        if(user.getType().equals("B")) {
+            user.setBusinessNumber(dto.getBusinessNumber());
+        }
 
         userService.save(user);
 
@@ -129,16 +120,12 @@ public class UserController {
     public BaseResponse<String> update(@RequestBody UserDto.UpdateDto dto) {
         logger.info("update api");
         User user = userService.findByEmail(dto.getEmail());
-        if(user != null) {
             user.setName(dto.getName());
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
             user.setPhone(dto.getPhoneNumber());
             userService.save(user);
             return BaseResponse.success("update success");
-        } else {
-            logger.error("user not found");
-            return BaseResponse.error(ErrorCode.UPDATE_FAILED);
-        }
+
     }
 
     @GetMapping("/getUser")
@@ -146,18 +133,14 @@ public class UserController {
     public BaseResponse<UserDto.ResponseDto> getUser(@RequestParam long id) {
         logger.info("getUser api");
         User user = userService.findById(id);
-        if(user != null) {
             UserDto.ResponseDto responseDto = UserDto.ResponseDto.builder()
                     .email(user.getEmail())
                     .name(user.getName())
                     .nickname(user.getNickname())
                     .type(user.getType())
+                    .register(user.getRegister())
                     .build();
             return BaseResponse.success(responseDto);
-        } else {
-            logger.error("user not found");
-            return BaseResponse.error(ErrorCode.NO_EXIST);
-        }
     }
 
     @PostMapping("/verify")
@@ -165,18 +148,12 @@ public class UserController {
     public BaseResponse<String> verify(@RequestParam String email, String password) {
         logger.info("verify api");
         User user = userService.findByEmail(email);
-
-        if(user != null) {
             if(passwordEncoder.matches(password, user.getPassword())) {
                 return BaseResponse.success("ok");
             } else {
                 logger.info("password not match");
                 return BaseResponse.error(ErrorCode.INCORRECT_PASSWORD);
             }
-        } else {
-            logger.error("user not found");
-            return BaseResponse.error(ErrorCode.NO_EXIST);
-        }
     }
 
     @PostMapping("/emailVerification")
@@ -184,14 +161,9 @@ public class UserController {
     public BaseResponse<String> emailVerify(@RequestParam String email) {
         logger.info("emailVerify api");
         User user = userService.findByEmail(email);
-        if(user != null) {
             String code = emailVerificationService.createVerificationCode(email);
             emailService.sendHtmlEmail(email,"[Quedoc] 이메일 인증",code);
 
-        } else {
-            logger.error("user not found");
-            return BaseResponse.error(ErrorCode.NO_EXIST);
-        }
         return BaseResponse.success("ok");
     }
     @GetMapping("/verify")
@@ -208,12 +180,7 @@ public class UserController {
     public BaseResponse<String> withdrawal(@RequestParam String email) {
         logger.info("withdrawal api");
         User user = userService.findByEmail(email);
-        if(user != null) {
             userService.withdrawal(user);
-        } else {
-            logger.error("user not found");
-            return BaseResponse.error(ErrorCode.NO_EXIST);
-        }
         return BaseResponse.success("ok");
     }
 

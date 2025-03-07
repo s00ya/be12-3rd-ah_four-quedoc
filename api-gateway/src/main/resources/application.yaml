@@ -24,5 +24,28 @@ spring:
           uri: lb://api-user
           predicates:
             - Path=/user/**
+        - id: api-hospital
+          uri: lb://api-hospital
+          predicates:
+            - Path=/hospital/**
+        - id: api-notice
+          uri: lb://api-hospital
+          predicates:
+            - Path=/notice/**
+        - id: api-review
+          uri: lb://api-hospital
+          predicates:
+            - Path=/review/**
+        - id: api-reservation
+          uri: lb://api-reservation
+          predicates:
+            - Path=/reservation/**
 
-
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: user
+        url: /user/v3/api-docs
+      - name: reservation
+        url: /reservation/v3/api-docs

@@ -1,4 +1,4 @@
-rootProject.name = 'template'
+rootProject.name = 'be12-3rd-ah_four-quedoc'
 
 include 'api-user'
 include 'core'
@@ -8,5 +8,5 @@ include 'api-payment'
 include 'api-search'
 include 'api-reservation'
 include 'server-discovery'
-include 'api-search', 'hospital'
-
+include 'api-search'
+include 'api-board'
