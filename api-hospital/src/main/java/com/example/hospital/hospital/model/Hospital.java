@@ -54,5 +54,4 @@ public class Hospital {
     private String closeTime;
 
 
-
 }
