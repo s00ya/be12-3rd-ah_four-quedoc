@@ -35,12 +35,14 @@ public class ReviewController {
     @GetMapping("/read/{reviewIdx}")
     public ResponseEntity<ReviewDto.ReviewResponse> read (
             @PathVariable Long reviewIdx) {
+        logger.info("Read review api");
         ReviewDto.ReviewResponse response = reviewService.get(reviewIdx);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<ReviewDto.ReviewResponse>> list () {
+        logger.info("List review api");
         List<ReviewDto.ReviewResponse> response = reviewService.getList();
         return ResponseEntity.ok(response);
     }

@@ -43,16 +43,34 @@ public class ReviewService {
     }
 
     public ReviewDto.ReviewResponse get(Long reviewIdx) {
-        Review review = reviewRepository.findById(reviewIdx).orElseThrow();
+        logger.info("get reviewIdx: {}", reviewIdx);
+        try {
+            Review review = reviewRepository.findById(reviewIdx)
+                    .orElseThrow(() -> {
+                        logger.error("No review found for reviewIdx: {}", reviewIdx);
+                        return new CustomException(ErrorCode.NO_REVIEW_EXIST);
+                    });
 
-        return ReviewDto.ReviewResponse.of(review);
+            return ReviewDto.ReviewResponse.of(review);
+        } catch (Exception e) {
+            logger.error("Error fetching reviewIdx: {}", reviewIdx, e);
+            throw new CustomException(ErrorCode.NO_DATA);
+        }
     }
 
     public List<ReviewDto.ReviewResponse> getList() {
-        List<Review> reviewList = reviewRepository.findAll();
-        return reviewList.stream().map(ReviewDto.ReviewResponse::of).toList();
-
-
+        logger.info("Fetching all reviews");
+        try {
+            List<Review> reviewList = reviewRepository.findAll();
+            if (reviewList.isEmpty()) {
+                logger.warn("No reviews found");
+                throw new CustomException(ErrorCode.NO_REVIEW_EXIST);
+            }
+            return reviewList.stream().map(ReviewDto.ReviewResponse::of).collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("Error fetching review list", e);
+            throw new CustomException(ErrorCode.NO_DATA);
+        }
     }
     public List<ReviewDto.ReviewResponse> getReviewsByHospitalIdx(Long hospitalIdx) {
         List<Review> reviews = reviewRepository.findByHospitalIdx(hospitalIdx);
