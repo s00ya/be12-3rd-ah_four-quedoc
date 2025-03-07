@@ -1,8 +1,8 @@
 package com.example.search.controller;
 
 import com.example.core.common.BaseResponse;
-import com.example.hospital.hospital.model.HospitalDto;
-import com.example.search.SearchService;
+import com.example.hospital.model.HospitalDto;
+import com.example.search.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
