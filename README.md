@@ -74,6 +74,10 @@
 
 ---
 
+<h2>테스트 계정</h2>
+<h3>아이디 : test@test.com</h3>
+<h3>비밀번호 : Q1w2e3r4!</h3>
+
 <h2>프로젝트 관련 문서 📑</h2>
 <h3><a href="https://docs.google.com/spreadsheets/d/1x-hlYdYcrdf4xKSMesXhxJlb9vGeqBC7GFpo4s2X_9w/edit?usp=sharing" target="_blank">요구사항 명세서</a></h3>
 <br>
