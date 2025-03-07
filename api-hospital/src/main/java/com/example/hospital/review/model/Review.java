@@ -21,17 +21,13 @@ public class Review {
     private Long idx;
     private String title;
     private String contents;
-    private String nickName;
+//    private String nickName;
     private String passWord;
     private int score;
     private LocalDate createdAt;
     private boolean isPublic;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hospital_idx", nullable = false)
-    private Hospital hospital;
-
-    private Long hospitalId;
+    private Long hospitalIdx;
+    private Long userIdx;
 
 }

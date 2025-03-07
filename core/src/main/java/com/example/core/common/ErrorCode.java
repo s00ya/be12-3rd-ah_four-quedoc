@@ -25,6 +25,11 @@ public enum ErrorCode {
     NO_DATA(52002,"조회된 데이터 없음"),
     RESERVATION_DELETE_FAIL(52003,"예약 삭제 실패"),
     NO_RESERVATION_EXIST(52004,"존재하지 않는 예약입니다."),
+    RESERVATION_ALREADY_EXIST(52005,"이미 예약된 시간대입니다."),
+
+    // Board 관련 ErrorCode
+    BOARD_SAVE_FAIL(62001,"게시글 저장 실패"),
+    BOARD_LOAD_FAIL(62002,"게시글 불러오기 실패"),
 
     // Hospital 관련 ErrorCode
     HOSPITAL_NOT_FOUND(20000, "병원을 찾을 수 없습니다."),
@@ -33,7 +38,13 @@ public enum ErrorCode {
     HOSPITAL_DELETE_FAILED(20003, "병원 삭제에 실패했습니다."),
     HOSPITAL_DUPLICATE(20004, "이미 존재하는 병원입니다."),
     HOSPITAL_DETAIL_FAILED(21000, "병원 상세정보 불러오기에 실패했습니다."),
-    HOSPITAL_REVIEW_FAILED(22000, "리뷰 등록에 실패했습니다.");
+    REVIEW_CREATE_FAILED(22000, "리뷰 등록에 실패했습니다."),
+    REVIEW_DELETE_FAILED(22001, "리뷰 삭제에 실패했습니다."),
+    NO_REVIEW_EXIST(22002, "존재하지 않는 리뷰입니다."),
+    REVIEW_ALREADY_EXIST(22003, "이미 작성된 리뷰입니다."),
+    REVIEW_FETCH_FAILED(22004, "리뷰 조회에 실패했습니다.");
+
+
 
 
 

@@ -23,11 +23,13 @@ spring:
     database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
       ddl-auto: update
+    show-sql: true
 
 
     properties:
       hibernate:
         format_sql: true
+        type: trace
 springdoc:
   api-docs:
     path: /reservation/v3/api-docs

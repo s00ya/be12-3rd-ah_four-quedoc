@@ -38,14 +38,13 @@ public class UserDto {
         private String name;
         private String password;
         private String nickname;
-        private String birthDate;
         private String phoneNumber;
         private String customerTypeCode;
     }
 
     @Getter
     @Setter
-    @Schema(description = "유저 회원가입을 할때 사용하는 dto")
+    @Schema(description = "일반 사용자 회원가입을 할때 사용하는 dto")
     public static class SignupDto {
         @NotBlank(message = "이메일을 입력하세요.")
         @Email(message = "유효한 이메일 형식이 아닙니다.")
@@ -66,14 +65,14 @@ public class UserDto {
         @Size(min = 3, max = 15, message = "닉네임은 3~15자 사이여야 합니다.")
         private String nickname;
 
-        private String birthDate;
-
         @NotBlank(message = "전화번호를 입력하세요.")
         @Pattern(
                 regexp = "^01[0-9]\\d{7,8}$",
                 message = "전화번호 형식이 올바르지 않습니다. (예: 010-1234-5678)"
         )
         private String phoneNumber;
+
+        private String businessNumber;
 
         private String customerTypeCode;
     }
@@ -83,10 +82,11 @@ public class UserDto {
     @Builder
     @Schema(description = "유저 정보 응답할때 사용하는 dto")
     public static class ResponseDto {
+        private Long idx;
         private String email;
         private String name;
         private String nickname;
         private String type;
-        private boolean register;
+        private Boolean register;
     }
 }

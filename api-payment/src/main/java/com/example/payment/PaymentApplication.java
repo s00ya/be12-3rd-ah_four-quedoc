@@ -3,16 +3,13 @@ package com.example.payment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackages = {
-        "com.example.payment.model",
-})
 @EnableJpaRepositories(basePackages = {
-//        "com.example.apireservation.reservation",
         "com.example.core",
-        "com.example.payment"
+        "com.example.payment",
 })
 public class PaymentApplication {
 
