@@ -38,7 +38,12 @@ public enum ErrorCode {
     HOSPITAL_DELETE_FAILED(20003, "병원 삭제에 실패했습니다."),
     HOSPITAL_DUPLICATE(20004, "이미 존재하는 병원입니다."),
     HOSPITAL_DETAIL_FAILED(21000, "병원 상세정보 불러오기에 실패했습니다."),
-    HOSPITAL_REVIEW_FAILED(22000, "리뷰 등록에 실패했습니다.");
+    REVIEW_CREATE_FAILED(22000, "리뷰 등록에 실패했습니다."),
+    REVIEW_DELETE_FAILED(22001, "리뷰 삭제에 실패했습니다."),
+    NO_REVIEW_EXIST(22002, "존재하지 않는 리뷰입니다."),
+    REVIEW_ALREADY_EXIST(22003, "이미 작성된 리뷰입니다.");
+
+
 
 
 
