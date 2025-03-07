@@ -41,7 +41,8 @@ public enum ErrorCode {
     REVIEW_CREATE_FAILED(22000, "리뷰 등록에 실패했습니다."),
     REVIEW_DELETE_FAILED(22001, "리뷰 삭제에 실패했습니다."),
     NO_REVIEW_EXIST(22002, "존재하지 않는 리뷰입니다."),
-    REVIEW_ALREADY_EXIST(22003, "이미 작성된 리뷰입니다.");
+    REVIEW_ALREADY_EXIST(22003, "이미 작성된 리뷰입니다."),
+    REVIEW_FETCH_FAILED(22004, "리뷰 조회에 실패했습니다.");
 
 
 
