@@ -58,10 +58,15 @@ public class HospitalDto {
     @Builder
     @Schema(description = "Hospital 조회를 위한 dto")
     public static class HospitalResponse {
+        @Schema(description = "Hospital 테이블의 primary key, auto_increment", example = "1")
         private Long idx;
+        @Schema(description = "병원 이름", example = "튼튼병원")
         private String name;
+        @Schema(description = "주소", example = "서울시 동작구")
         private String address;
+        @Schema(description = "진료과목", example = "소아과")
         private String department;
+        @Schema(description = "전화번호", example = "010-0000-0000")
         private String phoneNumber;
 
         public static HospitalResponse from(Hospital hospital) {

@@ -23,7 +23,9 @@ public class ReviewDto {
         private int score;
         @Schema(description = "공개글", example = "true")
         private boolean isPublic = true;
+        @Schema(description = "병원 idx", example = "1")
         private Long hospitalIdx;
+        @Schema(description = "사용자 idx", example = "1")
         private Long userIdx;
 
         public Review toEntity() {
@@ -58,7 +60,9 @@ public class ReviewDto {
         private LocalDate createdAt;
         @Schema(description = "공개글", example = "true")
         private boolean isPublic;
+        @Schema(description = "병원 idx", example = "1")
         private Long hospitalIdx;
+        @Schema(description = "사용자 idx", example = "1")
         private Long userIdx;
 
         public static ReviewResponse of(Review entity) {
