@@ -23,8 +23,8 @@ public class ReviewController {
     private final ReviewService reviewService;
     private static final Logger logger = LogManager.getLogger(ReviewController.class);
 
-    @Operation(summary = "리뷰 등록", description = "병원 방문 유저에게 리뷰 정보를 받아 등록하는 API입니다.")
     @PostMapping("/create")
+    @Operation(summary = "리뷰 등록", description = "병원 방문 유저에게 리뷰 정보를 받아 등록하는 API입니다.")
     public ResponseEntity<ReviewDto.ReviewResponse> create (
             @RequestBody ReviewDto.ReviewRequest dto) {
         logger.info("Register review api");
@@ -33,6 +33,7 @@ public class ReviewController {
     }
 
     @GetMapping("/read/{reviewIdx}")
+    @Operation(summary = "리뷰 조회", description = "병원idx로 리뷰를 조회하는 API입니다.")
     public ResponseEntity<ReviewDto.ReviewResponse> read (
             @PathVariable Long reviewIdx) {
         logger.info("Read review api");
@@ -41,6 +42,7 @@ public class ReviewController {
     }
 
     @GetMapping("/list")
+    @Operation(summary = "리뷰 리스트 조회", description = "병원 리뷰 리스트를 조회하는 API입니다.")
     public ResponseEntity<List<ReviewDto.ReviewResponse>> list () {
         logger.info("List review api");
         List<ReviewDto.ReviewResponse> response = reviewService.getList();
@@ -48,6 +50,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/delete/{reviewIdx}")
+    @Operation(summary = "리뷰 삭제", description = "사용자가 병원 리뷰를 삭제하는 API입니다.")
     public BaseResponse<String> delete(@PathVariable Long reviewIdx) {
         logger.info("Delete review api");
         reviewService.delete(reviewIdx);
