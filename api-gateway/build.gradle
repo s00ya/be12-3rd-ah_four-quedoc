@@ -17,11 +17,6 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.3'
 
     implementation project(':core')
-    implementation project(':api-hospital')
-    implementation project(':api-reservation')
-    implementation project(':api-user')
-    implementation project(':server-discovery')
-
 }
 dependencyManagement {
     imports {

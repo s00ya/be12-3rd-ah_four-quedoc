@@ -119,3 +119,5 @@
 /api-user/build/tmp/compileJava/compileTransaction/stash-dir/UserService.class.uniqueId1
 api-hospital/build/
 gradle.properties
+/demo/.gradle/
+/demo/build/
