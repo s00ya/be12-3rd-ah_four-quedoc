@@ -36,12 +36,9 @@
   <img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/>
   <img src="https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"/>
   <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/>
   <img src="https://img.shields.io/badge/AWS EC2-232F3E?style=for-the-badge&logo=amazonec2&logoColor=white"/>
   <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Lombok-CA4245?style=for-the-badge&logo=lombok&logoColor=white"/>
 </div>
 
 
@@ -58,8 +55,6 @@
 <h3 align="center">협업 툴</h3>
 <div align="center">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
-  <img src="https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white"/>
-  <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
   <img src="https://img.shields.io/badge/Google%20Docs-4285F4?style=for-the-badge&logo=googledocs&logoColor=white"/>
 </div>
 
@@ -87,7 +82,7 @@
 
 <br>
 <h2>Swagger 📜</h2>
-<h3><a href="http://www.cheeeze.kro.kr/" target="_blank">Swagger 링크</a></h3>
+<h3><a href="http://www.cheeeze.kro.kr/swagger-ui/index.html" target="_blank">Swagger 링크</a></h3>
 
 <br>
 <h2>시스템 아키텍처 🖥️</h2>
