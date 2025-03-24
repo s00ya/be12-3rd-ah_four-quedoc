@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-hospital-v1
+  namespace: jjs
+  labels:
+    app: api-hospital
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-hospital
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: api-hospital
+        version: v1
+    spec:
+      containers:
+        - name: api-hospital
+          image: s00ya/api-hospital:1.0
+          ports:
+            - containerPort: 8080

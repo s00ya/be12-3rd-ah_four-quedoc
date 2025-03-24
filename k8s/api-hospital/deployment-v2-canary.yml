@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-hospital-v2
+  namespace: jjs
+  labels:   # ✅ 무조건 metadata 안에 위치
+    app: api-hospital
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-hospital
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: api-hospital
+        version: v2
+    spec:
+      containers:
+        - name: api-hospital
+          image: s00ya/api-hospital:2.0
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: api-hospital-config

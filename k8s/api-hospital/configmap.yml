@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-hospital-config
+  namespace: jjs
+data:
+  DB_URL: "jdbc:mariadb://mariadb-service:3306/mydb"
+
