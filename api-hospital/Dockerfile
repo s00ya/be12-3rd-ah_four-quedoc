@@ -1,4 +1,4 @@
-FROM ubuntu:latest
-LABEL authors="Playdata"
-
-ENTRYPOINT ["top", "-b"]
+FROM    openjdk:17-ea-slim-buster
+EXPOSE  8080
+ADD     ./build/libs/api-hospital-0.0.1-SNAPSHOT.jar /app.jar
+CMD     java -jar /app.jar
