@@ -18,12 +18,15 @@ pipeline {
             }
         }
 
-        stage('Gradle Build') {
-            steps {
-                echo "✅ Gradle 빌드 시작!"
-                sh './gradlew :api-hospital:clean :api-hospital:build'
-            }
-        }
+                stage('Gradle Build') {
+                    steps {
+                        echo "Add Permission"
+                        sh 'chmod +x gradlew'
+
+                        echo "Build"
+                        sh './gradlew bootJar'
+                    }
+                }
 
         stage('Docker Build & Push') {
             steps {
