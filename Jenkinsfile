@@ -24,7 +24,7 @@ pipeline {
                         sh 'chmod +x gradlew'
 
                         echo "Build"
-                        sh './gradlew bootJar'
+                        sh './gradlew :api-hospital:bootJar --no-daemon --stacktrace --info'
                     }
                 }
 
