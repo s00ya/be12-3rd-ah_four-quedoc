@@ -45,6 +45,13 @@ public enum ErrorCode {
     REVIEW_FETCH_FAILED(22004, "리뷰 조회에 실패했습니다.");
 
 
+    // Payment 관련 ErrorCode
+    PAYMENT_PROCESS_FAILED(13000, "결제 처리 실패"),
+    PAYMENT_NOT_FOUND(13001, "결제 정보를 찾을 수 없습니다."),
+    PAYMENT_INSUFFICIENT_FUNDS(13002, "결제 금액 부족"),
+    PAYMENT_METHOD_NOT_SUPPORTED(13003, "지원되지 않는 결제 방법"),
+    PAYMENT_ALREADY_PROCESSED(13004, "이미 처리된 결제입니다."),
+    PAYMENT_REFUND_FAILED(13005, "결제 환불 실패");
 
 
 
